@@ -30,18 +30,25 @@
 
 <PageTitle>Posts</PageTitle>
 
-<MudContainer MaxWidth="MaxWidth.Large">
-    <div class="pt-2 pb-2">
+<MudContainer MaxWidth="MaxWidth.Large" Style="@($"padding-top:0%;padding-bottom:0%;margin-bottom:10%")">
+
+    <MudContainer>
         <PostSearchForm OnSearch="HandleSearchPost" onValidSearch="HandleResetSearch" />
-    </div>
-    <div class="pt-2 pb-2">
+    </MudContainer>
+
+    <MudContainer>
         @if (Status == BlogStatus.Closed)
         {
-            <MudText Typo="Typo.h6" Align="Align.Start" Style="@($"color:{Colors.Red.Default};font-size:1.25rem;text-transform: uppercase;")">Blog status is <strong>closed</strong>. New posts can not be created.</MudText>
+            <MudText Typo="Typo.h6" Align="Align.Start" Style="@($"color:{Colors.Red.Default};font-size:1.25rem;text-transform: uppercase;")">Blog status is <b>closed</b>. New posts can not be created.</MudText>
 
         }
-    </div>
-    <div class="pt-2 pb-2">
+    </MudContainer>
+
+    <MudContainer>
+        <MudText Typo="Typo.h5" Align="Align.Start" Style="@($"color:#36454F;font-size:1.5rem;text-transform:uppercase;padding:20px;")"><b>list of posts</b></MudText>
+    </MudContainer>
+
+    <MudContainer>
         <AuthorizeView>
             <Authorized>
                 @if (Status == BlogStatus.Open)
@@ -54,22 +61,18 @@
                     }
                     else
                     {
-                        <div class="row pt-4 pb-3">
-                            @*<div class="col-6">
-                    <MudText Typo="Typo.h4" Align="Align.Start" Style="@($"color:{Colors.Cyan.Darken4};font-size:1.5rem;text-transform: uppercase;")">Posts</MudText>
-                    </div>*@
-
-                            <div class="text-end">
-                                <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.AddCircle" Color="Color.Info" @onclick="OpenForm">Create new post</MudButton>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col mb-0 d-flex flex-column justify-content-between">
+                                    <div class="text-start"><MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.AddCircle" Style="@($"color:white;background-color:#8A9A5B;")" @onclick="OpenForm">Create</MudButton></div>
+                                </div>
                             </div>
-
                         </div>
                     }
                 }
             </Authorized>
         </AuthorizeView>
-    </div>
-    <div class="pt-2 pb-2">
+
         @if (isLoading)
         {
             <div class="text-center">
@@ -79,16 +82,12 @@
         }
         else
         {
-            <PostHeader />
             foreach (var postModel in postModels)
             {
                 <PostItem PostModel="postModel" />
             }
         }
-    </div>
-    <div class="pt-2 pb-15">
-        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Outlined.ArrowBack" Style="@($"color:{Colors.Cyan.Darken4};font-size:1.25rem")" href="@($"/blogs")">Back to blogs</MudButton>
-    </div>
+    </MudContainer>
 </MudContainer>
 
 @code {

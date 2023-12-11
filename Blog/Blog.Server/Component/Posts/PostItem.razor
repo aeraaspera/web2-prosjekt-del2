@@ -1,26 +1,27 @@
 ﻿@using Blog.Common.Model.Dto
 @using Blog.Common.Model.ViewModel
 
-<div class="col-12 px-2">
-    <table class="table table-bordered">
-        <tbody class="table-body">
-        <tr>
-            <td width="15%">@PostModel.UserName</td>
-            <td width="15%">@PostModel.PostTitle</td>
-            <td width="40%">@PostModel.PostDetails</td>
-            <td width="30%">
-
-                @foreach (var tag in PostModel.TagsList)
-                {
-                    <MudButton Variant="Variant.Text" Color="Color.Info" href="@tag">@tag</MudButton>
-                }
-            </td>
-            <td>
-                <MudButton Variant="Variant.Filled" Color="Color.Default" href="@($"/posts/details/{PostModel.BlogID}/{PostModel.PostID}")">details</MudButton>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<div class="container p-3 my-3 border rounded bg-light">
+    <div class="row align-items-center">
+        <div class="col-sm-2">
+            @PostModel.UserName
+        </div>
+        <div class="col-sm-2">
+            <b Style="@($"color:#6082B6;")">@PostModel.PostTitle</b>
+        </div>
+        <div class="col-sm-3">
+            @PostModel.PostDetails
+        </div>
+        <div class="col-sm-2">
+            @foreach (var tag in PostModel.TagsList)
+            {
+                <MudButton Variant="Variant.Text" Color="Color.Info" href="@tag">@tag</MudButton>
+            }
+        </div>
+        <div class="col-sm-1">
+            <MudButton Variant="Variant.Filled" Style="@($"color:#E5E4E2;background-color:#7393B3;")" href="@($"/posts/details/{PostModel.BlogID}/{PostModel.PostID}")">details</MudButton>
+        </div>
+    </div>
 </div>
 
 @code {

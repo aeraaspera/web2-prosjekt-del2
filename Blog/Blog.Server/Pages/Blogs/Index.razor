@@ -8,49 +8,48 @@
 
 <PageTitle>Blogs</PageTitle>
 
-<MudContainer Fixed="true">
-    <div class="pt-2 pb-2">
+<MudContainer MaxWidth="MaxWidth.Large" Style="@($"padding-top:0%;padding-button:0%;")">
+    
+    <MudContainer>
+        <MudText Typo="Typo.h5" Align="Align.Start" Style="@($"color:#36454F;font-size:1.5rem;text-transform:uppercase;padding:20px;")"><b>list of blogs</b></MudText>
+        </MudContainer>
+    <MudContainer>
+
         @if (isLoading)
         {
             <div class="text-center">
                 <h4>Loading...</h4>
                 <img src="images/loading.gif"/>
             </div>
-                
-                }
-                else
-                {
-                <AuthorizeView>
-                    <Authorized>
-                        <MudText Typo="Typo.h5" Align="Align.Start" Style="@($"color:{Colors.Cyan.Darken4};font-size:1.5rem;text-transform: uppercase;")">Subscribed blogs</MudText>
-                        <BlogHeader/>
-                        @foreach (var subsribedBlogDto in subscribedBlogDtos)
-                        {
-                            <BlogItem BlogDto="subsribedBlogDto" SubscribedBlogs="subscribedBlogDtos"/>
-                        }
-                    </Authorized>
-                </AuthorizeView>
+        }
+        else
+        {
+            <AuthorizeView>
+                <Authorized>
 
-                <MudText Typo="Typo.h5" Align="Align.Start" Style="@($"color:{Colors.Cyan.Darken4};font-size:1.5rem;text-transform: uppercase;")">Unsubscribed blogs</MudText>
-                <BlogHeader/>
-                foreach (var blogDto in blogDtos)
-                {
+                    <MudText Typo="Typo.h5" Align="Align.Center" Style="@($"color:#36454F;font-size:1.5rem;text-transform:uppercase;")">Subscribed blogs</MudText>
+
+                    @foreach (var subsribedBlogDto in subscribedBlogDtos)
+                    {
+                        <BlogItem BlogDto="subsribedBlogDto" SubscribedBlogs="subscribedBlogDtos"/>
+                    }
+                </Authorized>
+            </AuthorizeView>
+
+            <MudText Typo="Typo.h5" Align="Align.Center" Style="@($"color:#36454F;font-size:1.5rem;text-transform:uppercase;")">Unsubscribed blogs</MudText>
+
+            foreach (var blogDto in blogDtos)
+            {
                 <BlogItem BlogDto="blogDto" OnSubscribeCalled=HandleSubscribe/>
-                }
-                }
-            </div>
-
-    <div class="pt-2 pb-2">
-        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Outlined.ArrowBack" Style="@($"color:{Colors.Cyan.Darken4};font-size:1.25rem")" href="@($"/")">Back to homepage</MudButton>
-    </div>
-
+            }
+        }
+    </MudContainer>
 </MudContainer>
 
 
 @code {
     [CascadingParameter]
     private Task<AuthenticationState> AuthStateTask { get; set; }
-
     private IEnumerable<BlogDto> blogDtos;
     private IEnumerable<BlogDto> subscribedBlogDtos = new List<BlogDto>();
     private bool isLoading = true;
@@ -89,7 +88,6 @@
                 StateHasChanged();
             }
         }
-
         isLoading = false;
     }
 

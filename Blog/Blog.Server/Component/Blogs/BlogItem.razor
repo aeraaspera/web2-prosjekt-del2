@@ -1,36 +1,44 @@
 ﻿@using Blog.Common.Model.Dto
 @using Microsoft.AspNetCore.Components
 
-<MudContainer Fixed="true">
-    <div>
-        <table class="table table-bordered">
-            <tbody class="table-body">
-                <tr>
-                    <td width="5%">@BlogDto.BlogID</td>
-                    <td width="10%">@BlogDto.BlogTitle</td>
-                    <td width="10%">@BlogDto.BlogDetails</td>
-                    <td width="40%">@BlogDto.BlogOwnerID</td>
-                    <td width="10%">@BlogDto.BlogStatus</td>
-                    <td>
-                        @if (IsSubscribed(BlogDto.BlogID))
-                        {
-                            <MudButton Variant="Variant.Text" Style="@($"color:{Colors.BlueGrey.Darken2};font-size:1.25rem")" Disabled="true">Subscribed</MudButton>
-                        }
-                        else
-                        {
-                            <AuthorizeView>
-                                <Authorized>
-                                    <MudButton Variant="Variant.Filled" Style="@($"color:{Colors.Grey.Lighten5}, background-color:{Colors.BlueGrey.Darken2}")" @onclick=SubscribeBlog>Subscribe</MudButton>
-                                </Authorized>
-                            </AuthorizeView>
-                        }
-                        <MudButton Variant="Variant.Filled" Color="Color.Default" href="@($"/posts/{BlogDto.BlogID}")">Go to posts</MudButton>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</MudContainer>
+<div class="container p-3 my-3 border rounded bg-light">
+    <div class="row align-items-center">
+        <div class="col-sm-1">
+            <a class="" href="@($"/posts/{BlogDto.BlogID}")"><img src="/images/blog.png" class="img-fluid" alt="Blog" /></a>
+        </div>
+        <div class="col-sm-6">
+            <div>
+                <h6>
+                    <a href="@($"/posts/{BlogDto.BlogID}")">@BlogDto.BlogTitle</a>
+                </h6>
+            </div>
+            <div>
+                @BlogDto.BlogDetails
+            </div>
+        </div>
+        <div class="col-sm-1">
+            @BlogDto.BlogStatus
+        </div>
+        <div class="col-sm-2">
+            @if (IsSubscribed(BlogDto.BlogID))
+            {
+                <MudButton Variant="Variant.Text" Disabled="true" Style="@($"color:#36454F;text-transform:uppercase;")">Subscribed</MudButton>
+            }
+            else
+            {
+                <AuthorizeView>
+                    <Authorized>
+                        <MudButton Variant="Variant.Filled" Style="@($"color:#E5E4E2;background-color:#8A9A5B;")" @onclick=SubscribeBlog>Subscribe</MudButton>
+                    </Authorized>
+                </AuthorizeView>
+            }
+        </div>
+            <div class="col-sm-2">
+            <MudButton Variant="Variant.Filled" Style="@($"color:#E5E4E2;background-color:#7393B3;")" href="@($"/posts/{BlogDto.BlogID}")">posts</MudButton>
+            </div>
+        </div>
+     
+</div>
 
 @code {
     [Parameter]

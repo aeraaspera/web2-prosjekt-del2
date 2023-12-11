@@ -25,57 +25,54 @@
 
 <PageTitle>PostDetails</PageTitle>
 
-@if (isLoadingHeader)
-{
-    <div class="text-center">
-        <h4>Loading Post Details...</h4>
-        <img src="images/loading.gif"/>
-    </div>
-}
-else
-{
-    <MudContainer Fixed="true">
-        <div>
-            <MudText Typo="Typo.h5" Align="Align.Center" Style="@($"color:{Colors.Cyan.Darken4};font-size:1.5rem;text-transform: uppercase;")">Post @PostId</MudText>
-            
-            <PostDetailsItem PostModel="postModel" />
 
-            @if (Status == BlogStatus.Closed)
-            {
-                <div>
-                    Blog status is CLOSED. New comments can not be created.
-                </div>
-            }
-            
-            @if (isLoading)
-            {
-                <div class="text-center">
-                    <h4>Loading...</h4>
-                    <img src="images/loading.gif"/>
-                </div>
-            }
-            else
-            {
-                <MudText Typo="Typo.h5" Align="Align.Center" Style="@($"color:{Colors.Cyan.Darken4};font-size:1.5rem;text-transform: uppercase;")">Comments</MudText>
-                @*<CommentHeader />*@
-                foreach (var commentModel in commentModels)
-                {
-                    <CommentItem CommentModel="commentModel" />
-                }
-            }
-
-            <AuthorizeView>
-                <Authorized>
-                    @if (Status == BlogStatus.Open)
-                    {
-                        <div>
-                            <CommentForm OnCommentCreated="HandleCommentCreated" />
-                        </div>
-                    }
-                </Authorized>
-            </AuthorizeView>
+<MudContainer MaxWidth="MaxWidth.Large" Style="@($"margin-bottom:20%")">
+    @if (isLoadingHeader)
+    {
+        <div class="text-center">
+            <h4>Loading Post Details...</h4>
+            <img src="images/loading.gif" />
         </div>
-    </MudContainer>}
+    }
+    else
+    {
+        <PostDetailsItem PostModel="postModel" />
+
+        @if (Status == BlogStatus.Closed)
+        {
+            <MudText Typo="Typo.h6" Align="Align.Start" Style="@($"color:{Colors.Red.Default};font-size:1.25rem;text-transform: uppercase;")">Blog status is <b>closed</b>. New comments can not be created.</MudText>
+        }
+
+        @if (isLoading)
+        {
+            <div class="text-center">
+                <h4>Loading...</h4>
+                <img src="images/loading.gif" />
+            </div>
+        }
+        else
+        {
+            <MudText Typo="Typo.h5" Align="Align.Center" Style="@($"color:#36454F;font-size:1.5rem;text-transform: uppercase;padding-top:20px;padding-bottom:10px;")">Comments</MudText>
+
+            foreach (var commentModel in commentModels)
+            {
+                <CommentItem CommentModel="commentModel" />
+            }
+        }
+
+        <AuthorizeView>
+            <Authorized>
+                @if (Status == BlogStatus.Open)
+                {
+                    <div>
+                        <CommentForm OnCommentCreated="HandleCommentCreated" />
+                    </div>
+                }
+            </Authorized>
+        </AuthorizeView>
+    }
+
+</MudContainer>
 
 @code {
     [Parameter]

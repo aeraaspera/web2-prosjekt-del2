@@ -1,20 +1,14 @@
 ﻿@using Blog.Common.Model.Dto
 @using Blog.Common.Model.ViewModel
 
-<MudContainer Fixed="true">
-    <div>
-        <table class="table table-bordered text-start bg-light">
-            <tbody class="table-body">
-                <tr>
-                    <td width="10%"><strong>@CommentModel.UserName</strong></td>
-                    @*<td width="20%">@CommentModel.CommentTitle</td>*@
-                    <td width="70%">@CommentModel.CommentDetails</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</MudContainer>
-
+<MudCard Style="@($"background-color:white;")">
+    <MudCardContent>
+        <MudText Typo="Typo.body2" Align="Align.Start" Style="@($"color:#6082B6;")">@CommentModel.UserName</MudText>
+        <MudText Typo="Typo.body2" Align="Align.Start">@CommentModel.CommentTitle</MudText>
+        <MudText Typo="Typo.body2" Align="Align.Start">@CommentModel.CommentDetails</MudText>
+    </MudCardContent>
+    <hr />
+</MudCard>
 
 @code {
     [Parameter]

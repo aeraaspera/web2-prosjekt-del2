@@ -1,6 +1,6 @@
 ﻿@using Blog.Common.Model.ViewModel
 
-<MudText Typo="Typo.h5" Align="Align.Start" Style="@($"color:{Colors.Cyan.Darken4};font-size:1.5rem;text-transform: uppercase;")">search in the posts</MudText>
+<MudText Typo="Typo.h5" Align="Align.Start" Style="@($"color:{Color.Default};background-color:{Color.Default};font-size:1.5rem;text-transform: uppercase;")">search in the posts</MudText>
 <EditForm Model="@Model" OnValidSubmit=ResetSearch>
     <DataAnnotationsValidator />
     <div>
@@ -19,7 +19,7 @@
         </div>
 
         <div class="pt-2" align="right">
-            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Default">reset data</MudButton>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Style="@($"color:white;background-color:#7393B3;")">reset data</MudButton>
         </div>
     </div>
 </EditForm>

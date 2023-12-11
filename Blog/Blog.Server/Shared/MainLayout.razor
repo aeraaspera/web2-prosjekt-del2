@@ -2,7 +2,7 @@
 
 <PageTitle>Blog.Server</PageTitle>
 
-<MudThemeProvider />
+<MudThemeProvider Theme="_currentTheme" />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
@@ -14,7 +14,8 @@
                 @Body
             </MudContainer>
         </MudMainContent>
-        <MudAppBar Elevation="1" Style="top: auto; bottom: 0;" Dense="true" Fixed="true" Color="Color.Dark">
+
+        <MudAppBar Elevation="1" Style="color:#E5E4E2;background-color: #71797E;top:auto;bottom: 0;" Dense="true" Fixed="true">
             <MudGrid Justify="Justify.Center">
                 <MudText Style="font-size: medium">
                     © 2023 Copyright:
@@ -25,5 +26,13 @@
     </MudLayout>
 </div>
 
+@code {
 
-
+    private MudTheme _currentTheme = new MudTheme()
+        {
+            Palette = new Palette
+            {
+                AppbarBackground = "#71797E",
+            },
+        };
+}

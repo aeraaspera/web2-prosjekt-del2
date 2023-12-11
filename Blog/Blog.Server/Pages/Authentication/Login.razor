@@ -18,14 +18,16 @@
                 SuccessIcon="fa fa-thumbs-up"
                 ErrorIcon="fa fa-bug" />
 
+<MudContainer MaxWidth="MaxWidth.Large" Style="@($"padding-top:10%;padding-button:10%")">
+
 <EditForm Model="@Model" OnValidSubmit="LoginUser">
     <DataAnnotationsValidator />
     <MudGrid Justify="Justify.Center" Class="align-items-center">
         <MudItem xs="12" sm="6">
             <MudCard Class="m-5">
-                <MudCardHeader Style="background-color: #D7E2E3">
+                <MudCardHeader Style="background-color: grey">
                     <CardHeaderContent>
-                        <MudText Typo="Typo.h6" Style="@($"color:{Colors.BlueGrey.Darken2};text-transform: uppercase;")" Align="Align.Center">sign in</MudText>
+                            <MudText Typo="Typo.h6" Align="Align.Center" Style="@($"color:{Color.Default};background-color:{Color.Default};text-transform: uppercase;")">sign in</MudText>
                     </CardHeaderContent>
                 </MudCardHeader>
                 <MudDivider />
@@ -34,12 +36,14 @@
                     <MudTextField Label="Password" Class="mt-3" @bind-Value="Model.Password" For="@(() => Model.Password)" InputType="InputType.Password" />
                 </MudCardContent>
                 <MudCardActions>
-                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Dark" FullWidth="true">Sign In</MudButton>
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" FullWidth="true" Style="@($"color:{Color.Default};background-color:{Color.Default};")">Sign In</MudButton>
                 </MudCardActions>
             </MudCard>
         </MudItem>
     </MudGrid>
 </EditForm>
+
+</MudContainer>
 
 @code {
     public LoginModel Model { get; set; } = new();

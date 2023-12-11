@@ -1,36 +1,31 @@
 ﻿@using Blog.Common.Model.ViewModel
 @using Microsoft.AspNetCore.Components
 
-<MudContainer Fixed="true">
-    <div>
-        <MudText Typo="Typo.h5" Align="Align.Left" Style="@($"color:{Colors.Cyan.Darken4};font-size:1.5rem;text-transform: uppercase;")">Create a comment</MudText>
-        <EditForm Model="@Model" OnValidSubmit="CreateComment">
-            <DataAnnotationsValidator />
 
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="py-2">
-                        <InputText @bind-Value="Model.CommentTitle" placeholder="Title" class="form-control mb-2" />
-                        <ValidationMessage For="(() => Model.CommentTitle)"></ValidationMessage>
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <div class="py-2">
-                        <InputText @bind-Value="Model.CommentDetails" placeholder="Details" class="form-control mb-2" />
-                        <ValidationMessage For="(() => Model.CommentDetails)"></ValidationMessage>
-                    </div>
-                </div>
+<EditForm Model="@Model" OnValidSubmit="CreateComment" Style="@($"padding-top:0px;padding-bottom:50px;")">
+    <DataAnnotationsValidator />
+    <div class="row">
+        <div class="col-lg-2">
+            <div class="py-2">
+                <InputText @bind-Value="Model.CommentTitle" placeholder="Title" class="form-control mb-2" />
+                <ValidationMessage For="(() => Model.CommentTitle)"></ValidationMessage>
             </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="py-2">
-                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.AddCircle" Color="Color.Info">Create</MudButton>
-                    </div>
-                </div>
+        </div>
+        <div class="col-lg-10">
+            <div class="py-2">
+                <InputText @bind-Value="Model.CommentDetails" placeholder="Details" class="form-control mb-2" />
+                <ValidationMessage For="(() => Model.CommentDetails)"></ValidationMessage>
             </div>
-        </EditForm>
+        </div>
     </div>
-</MudContainer>
+    
+    <div class="row">
+        <div class="col-lg-12 padding:5px margin:10px">
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" FullWidth="false" StartIcon="@Icons.Material.Filled.AddCircle" Style="@($"color:#E5E4E2;background-color:#8A9A5B;")">Create</MudButton>
+        </div>
+    </div>
+</EditForm>
+
 
 @code {
     [Parameter]

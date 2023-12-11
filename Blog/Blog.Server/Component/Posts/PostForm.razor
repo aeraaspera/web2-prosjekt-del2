@@ -7,7 +7,7 @@
             <DataAnnotationsValidator />
             <div class="card m-5">
                 <div class="card-header">
-                    <MudText Typo="Typo.h5" Align="Align.Center" Style="@($"color:{Colors.Cyan.Darken4};font-size:1.5rem;text-transform: uppercase;")">Create a new post</MudText>
+                    <MudText Typo="Typo.h5" Align="Align.Center" Style="@($"color:#36454F;background-color:{Color.Default};font-size:1.5rem;text-transform: uppercase;")">Create a new post</MudText>
                 </div>
                 <div class="card-body">
                     <div class="py-2">
@@ -23,7 +23,7 @@
                         <ValidationMessage For="(()=>Model.Tags)"></ValidationMessage>
                     </div>
                     <div class="text-center">
-                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.AddCircle" Color="Color.Info">Create post</MudButton>
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.AddCircle" Style="@($"color:white;background-color:#8A9A5B;")">Create post</MudButton>
                     </div>
                 </div>
             </div>

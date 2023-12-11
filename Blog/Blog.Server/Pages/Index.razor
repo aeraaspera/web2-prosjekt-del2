@@ -2,24 +2,22 @@
 
 <PageTitle>Homepage</PageTitle>
 
-<MudContainer Fixed="true">
+<MudContainer MaxWidth="MaxWidth.ExtraSmall" Style="@($"padding-top:10%;padding-button:10%;")">
 
-    <div class="pt-4 pb-4">
-
-        <MudText Typo="Typo.h5" Align="Align.Center" Color="Color.Dark">
+    <MudText Typo="Typo.h5" Align="Align.Center" Style="@($"color:#36454F;")">
             Hello,
             @if (!string.IsNullOrEmpty(UserName))
             {
-                <strong>@UserName</strong>
+            <b Style="@($"color:#8A9A5B;")">@UserName</b>
             }
             else
             {
-                <strong>Guest</strong>
+            <b Style="@($"color:#8A9A5B;")">Guest</b>
             }
             <br />Welcome to
-            <MudButton Variant="Variant.Outlined" Style="@($"color:{Colors.Cyan.Darken4};font-size:1.25rem")" Color="Color.Dark" href="@($"/blogs")">blogs</MudButton>
+        <MudButton Variant="Variant.Outlined" Style="@($"color:#E5E4E2;background-color:#7393B3;font-size:1.25rem")" href="@($"/blogs")">blogs</MudButton>
         </MudText>
-    </div>
+   
 </MudContainer>
 
 

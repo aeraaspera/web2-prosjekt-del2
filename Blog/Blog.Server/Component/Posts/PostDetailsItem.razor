@@ -1,40 +1,23 @@
 ﻿@using Blog.Common.Model.Dto
 @using Blog.Common.Model.ViewModel
 
-<MudContainer Fixed="true">
-    <div>
-        <table class="table table-bordered" style="background-color: #D7E2E3">
-            <thead class="table-head text-center">
-                <tr>
-                    <th width="5%">BlogId</th>
-                    <th width="5%">PostId</th>
-                    <th width="20%">Owner</th>
-                    <th width="15%">Title</th>
-                    <th width="25%">Details</th>
-                    <th width="30%">Tags</th>
-                </tr>
-            </thead>
-            <tbody class="table-body bg-light text-center">
-                <tr>
-                    <td width="5%">@PostModel.BlogID</td>
-                    <td width="5%">@PostModel.PostID</td>
-                    <td width="20%">@PostModel.UserName</td>
-                    <td width="15%">@PostModel.PostTitle</td>
-                    <td width="25%">@PostModel.PostDetails</td>
-
-                    <td width="30%">
-                        @foreach (var tag in PostModel.TagsList)
-                        {
-                            <MudButton Variant="Variant.Text" Color="Color.Info" href="@tag">@tag</MudButton>
-                        }
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+<MudCard>
+    <MudCardContent Style="@($"background-color:#708090;")">
+        <MudText Typo="Typo.h6" Align="Align.Center" Style="@($"color:#E5E4E2;font-size:2.0rem;text-align: center;")">@PostModel.PostTitle</MudText>
+    </MudCardContent>
+    <MudCardContent>
+        <MudText Typo="Typo.body2" Align="Align.Start" Style="@($"color:#6082B6;")">@PostModel.UserName</MudText>
+        <MudText Typo="Typo.body2" Align="Align.Start">@PostModel.PostDetails</MudText>
+        <i>Please, leave your comment.</i>
+    </MudCardContent>
+    <hr />
+    <div class="text-start col-sm-12">
+        @foreach (var tag in PostModel.TagsList)
+        {
+            <MudButton Variant="Variant.Text" Color="Color.Info" href="@tag">@tag</MudButton>
+        }
     </div>
-</MudContainer>
-
-
+</MudCard>
 
 @code {
     [Parameter]
