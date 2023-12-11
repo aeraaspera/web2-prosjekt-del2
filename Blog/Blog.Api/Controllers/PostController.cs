@@ -43,7 +43,8 @@ namespace Blog.Api.Controllers
                     PostOwnerID = post.PostOwnerID,
                     PostTitle = post.PostTitle,
                     PostOwnerName = post.PostOwner.UserName,
-                    PostTags = _mapper.Map<List<PostTagDto>?>(post.PostTags)
+                    PostTags = _mapper.Map<List<PostTagDto>?>(post.PostTags),
+                    DateCreated = post.DateCreated
                 };
 
                 postDtos.Add(postDto);
@@ -85,7 +86,8 @@ namespace Blog.Api.Controllers
                 PostOwnerID = post.PostOwnerID,
                 PostTitle = post.PostTitle,
                 PostOwnerName = post.PostOwner.UserName,
-                PostTags = _mapper.Map<List<PostTagDto>?>(post.PostTags)
+                PostTags = _mapper.Map<List<PostTagDto>?>(post.PostTags),
+                DateCreated = post.DateCreated
             };
             return Ok(postDto);
         }

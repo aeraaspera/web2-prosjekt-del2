@@ -2,14 +2,14 @@
 @using Blog.Common.Model.ViewModel
 
 <div class="container p-3 my-3 border rounded bg-light">
-    <div class="row align-items-center">
+    <div class="row align-items-center justify-content-evenly">
         <div class="col-sm-2">
             @PostModel.UserName
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-1">
             <b Style="@($"color:#6082B6;")">@PostModel.PostTitle</b>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             @PostModel.PostDetails
         </div>
         <div class="col-sm-2">
@@ -20,6 +20,9 @@
         </div>
         <div class="col-sm-1">
             <MudButton Variant="Variant.Filled" Style="@($"color:#E5E4E2;background-color:#7393B3;")" href="@($"/posts/details/{PostModel.BlogID}/{PostModel.PostID}")">details</MudButton>
+        </div>
+        <div class="col-sm-2">
+            @PostModel.DateCreated
         </div>
     </div>
 </div>

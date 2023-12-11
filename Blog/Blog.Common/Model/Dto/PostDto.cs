@@ -24,5 +24,6 @@ namespace Blog.Common.Model.Dto
         public List<PostTagDto>? PostTags { get; set; }
         public string? ObjectOwnerId { get; set; }
         public string? PostOwnerName { get; set; }
+        public DateTime? DateCreated { get; set; }
     }
 }

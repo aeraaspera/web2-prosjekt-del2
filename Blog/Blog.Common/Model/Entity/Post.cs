@@ -29,5 +29,6 @@ namespace Blog.Common.Model.Entity
         public virtual IdentityUser PostOwner { get; set; }
         public List<PostTag>? PostTags { get; set; }
         public string? ObjectOwnerId { get; set; }
+        public DateTime? DateCreated { get; set; } = DateTime.Now;
     }
 }

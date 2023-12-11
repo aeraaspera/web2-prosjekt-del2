@@ -22,5 +22,12 @@ Back buttons are deleted
 
 New color pallete is used for alle elements: text, buttons etc.
 
+## Feature "feature-display-DateCreated-of-the-posts"
+new property "DateCreated" is added to dto, entities, viewmodels, postcontroller
+
+new migration + update database
+
+new layout to display DateCreated og the post
+
 
 
