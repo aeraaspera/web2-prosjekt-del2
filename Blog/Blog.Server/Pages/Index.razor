@@ -3,21 +3,52 @@
 <PageTitle>Homepage</PageTitle>
 
 <MudContainer Fixed="true">
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+
     <div class="pt-4 pb-4">
-       
+
         <MudText Typo="Typo.h5" Align="Align.Center" Color="Color.Dark">
-            Welcome to
+            Hello,
+            @if (!string.IsNullOrEmpty(UserName))
+            {
+                <strong>@UserName</strong>
+            }
+            else
+            {
+                <strong>Guest</strong>
+            }
+            <br />Welcome to
             <MudButton Variant="Variant.Outlined" Style="@($"color:{Colors.Cyan.Darken4};font-size:1.25rem")" Color="Color.Dark" href="@($"/blogs")">blogs</MudButton>
         </MudText>
     </div>
 </MudContainer>
 
 
+@code {
+
+    [CascadingParameter]
+    private Task<AuthenticationState>? AuthStateTask { get; set; }
+
+    private string? UserName { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var state = await GetAuthState();
+            if (state?.User?.Identities?.First().Claims.Any() == true)
+            {
+                UserName = state.User.Identities.First().Claims.ElementAt(2).Value;
+                StateHasChanged();
+            }
+        }
+    }
+
+    private async Task<AuthenticationState> GetAuthState()
+    {
+        var authState = await AuthStateTask;
+        return authState;
+    }
+}
 
 
 
