@@ -29,5 +29,8 @@ new migration + update database
 
 new layout to display DateCreated og the post
 
+## Feature "feature-display-DateCreated-of-the-comments"
 
+DateCreated is added to models/dto,entity,viewmodel
 
+New MudText is added to CommentItem to display DateCreated

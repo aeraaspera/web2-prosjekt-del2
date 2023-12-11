@@ -26,7 +26,8 @@ namespace Blog.Common.Model.Entity
         public virtual Post Post { get; set; }
         public int BlogID { get; set; }
         public string? ObjectOwnerId { get; set; }
+        public DateTime? DateCreated { get; set; } = DateTime.Now;
 
-        
+
     }
 }

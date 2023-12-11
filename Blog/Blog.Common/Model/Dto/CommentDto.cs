@@ -24,5 +24,6 @@ namespace Blog.Common.Model.Dto
         public int BlogID { get; set; }
         public string? ObjectOwnerId { get; set; }
         public string? CommentOwnerName { get; set; }
+        public DateTime? DateCreated { get; set; }
     }
 }

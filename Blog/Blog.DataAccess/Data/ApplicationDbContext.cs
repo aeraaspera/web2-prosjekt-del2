@@ -98,7 +98,8 @@ namespace Blog.DataAccess.Data
                 PostDetails = "post 1",
                 ObjectOwnerId = user1.Id,
                 PostOwnerID = user1.Id,
-                BlogID = blog1.BlogID
+                BlogID = blog1.BlogID,
+                DateCreated = DateTime.Parse("2023-12-11 14:25")
             };
 
             var post2 = new Post
@@ -108,7 +109,8 @@ namespace Blog.DataAccess.Data
                 PostDetails = "post 2",
                 ObjectOwnerId = user2.Id,
                 PostOwnerID = user2.Id,
-                BlogID = blog1.BlogID
+                BlogID = blog1.BlogID,
+                DateCreated = DateTime.Parse("2023-12-11 14:35")
             };
 
             var post3 = new Post
@@ -118,7 +120,8 @@ namespace Blog.DataAccess.Data
                 PostDetails = "post 3",
                 ObjectOwnerId = user1.Id,
                 PostOwnerID = user1.Id,
-                BlogID = blog2.BlogID
+                BlogID = blog2.BlogID,
+                DateCreated = DateTime.Parse("2023-12-11 16:25")
             };
 
             var comment1 = new Comment
@@ -129,7 +132,8 @@ namespace Blog.DataAccess.Data
                 ObjectOwnerId = user1.Id,
                 BlogID = 1,
                 CommentOwnerID = user1.Id,
-                PostID = post1.PostID
+                PostID = post1.PostID,
+                DateCreated = DateTime.Parse("2023-12-11 14:27")
             };
 
             var comment2 = new Comment
@@ -140,7 +144,8 @@ namespace Blog.DataAccess.Data
                 ObjectOwnerId = user2.Id,
                 BlogID = 1,
                 CommentOwnerID = user2.Id,
-                PostID = post1.PostID
+                PostID = post1.PostID,
+                DateCreated = DateTime.Parse("2023-12-11 14:30")
             };
 
             var comment3 = new Comment
@@ -151,7 +156,8 @@ namespace Blog.DataAccess.Data
                 ObjectOwnerId = user1.Id,
                 BlogID = 1,
                 CommentOwnerID = user1.Id,
-                PostID = post2.PostID
+                PostID = post2.PostID,
+                DateCreated = DateTime.Parse("2023-12-11 14:50")
             };
 
             var comment4 = new Comment
@@ -162,7 +168,8 @@ namespace Blog.DataAccess.Data
                 ObjectOwnerId = user2.Id,
                 BlogID = 1,
                 CommentOwnerID = user2.Id,
-                PostID = post2.PostID
+                PostID = post2.PostID,
+                DateCreated = DateTime.Parse("2023-12-11 15:10")
             };
 
             var comment5 = new Comment
@@ -173,7 +180,8 @@ namespace Blog.DataAccess.Data
                 ObjectOwnerId = user2.Id,
                 BlogID = 2,
                 CommentOwnerID = user2.Id,
-                PostID = post3.PostID
+                PostID = post3.PostID,
+                DateCreated = DateTime.Parse("2023-12-11 17:05")
             };
 
             var tag1 = new Tag

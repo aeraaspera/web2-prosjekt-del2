@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Blog.DataAccess.Migrations
 {
-    public partial class DateCreated : Migration
+    public partial class CommentsDateCreated : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -211,8 +211,7 @@ namespace Blog.DataAccess.Migrations
                         name: "FK_Posts_AspNetUsers_PostOwnerID",
                         column: x => x.PostOwnerID,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id"
-                        );
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Posts_Blogs_BlogID",
                         column: x => x.BlogID,
@@ -257,7 +256,8 @@ namespace Blog.DataAccess.Migrations
                     CommentOwnerID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     PostID = table.Column<int>(type: "int", nullable: false),
                     BlogID = table.Column<int>(type: "int", nullable: false),
-                    ObjectOwnerId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ObjectOwnerId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -306,8 +306,8 @@ namespace Blog.DataAccess.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "4860f6c2-2357-4f48-80b4-d48ce199ab06", 0, "cddda461-a892-42bd-bc4d-22d3d9f7b52e", "IdentityUser", "user1@test.com", true, false, null, "USER1@TEST.COM", "USER1@TEST.COM", "AQAAAAEAACcQAAAAEC9nTEMovxSPnXyFtlBOWRiMSv/ksSJAnye9t7+jEj+DR/qTN/iyeaJhyWfcGnN21Q==", null, false, "c5daba43-d968-466e-b00b-87e9f9ab0691", false, "user1@test.com" },
-                    { "921d333d-399d-4a35-ad3d-dfc4513a039f", 0, "e6a2900e-8ccd-45dd-958d-85e1215a99b9", "IdentityUser", "user2@test.com", true, false, null, "USER2@TEST.COM", "USER2@TEST.COM", "AQAAAAEAACcQAAAAEN4p8BVwZN/R5mbz2b0/w2f8OnQ8VeFiAmUJ6NWlB9SZOAYDb2AHA0unhKGixNGNnw==", null, false, "5626634d-ed5d-4da8-b065-29d9569bc19b", false, "user2@test.com" }
+                    { "f5f78732-73ff-4cd4-94b5-bbf3c7bd70d5", 0, "26dfc3cf-cbc2-4a32-99b7-312b8f563907", "IdentityUser", "user1@test.com", true, false, null, "USER1@TEST.COM", "USER1@TEST.COM", "AQAAAAEAACcQAAAAEBx8VjdfbejlSd7W6DI9C9MZmnTEQFgQ+3mqN2vm8UtWA/SNg1hggWtP1cMUbE4Rvw==", null, false, "6d073522-3c91-42dd-9c7b-d98c339387ca", false, "user1@test.com" },
+                    { "f6cc22af-2d22-4d38-889d-e16830d74411", 0, "e1923d35-3528-48e2-99a6-48cfaa9aa012", "IdentityUser", "user2@test.com", true, false, null, "USER2@TEST.COM", "USER2@TEST.COM", "AQAAAAEAACcQAAAAEFvoRzYh9qsXpRTOYxxU0t/nevingDqSwp2xJ27/2DxI4uJ1N4cgJsxTzW1CXysHwg==", null, false, "6654a6fb-d47d-42e3-969d-d3b9583cb889", false, "user2@test.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -325,26 +325,26 @@ namespace Blog.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "Blogs",
                 columns: new[] { "BlogID", "BlogDetails", "BlogOwnerID", "BlogStatus", "BlogTitle", "ObjectOwnerId" },
-                values: new object[] { 1, "blogg 1", "4860f6c2-2357-4f48-80b4-d48ce199ab06", 1, "Blogg 1", "4860f6c2-2357-4f48-80b4-d48ce199ab06" });
+                values: new object[] { 1, "blogg 1", "f5f78732-73ff-4cd4-94b5-bbf3c7bd70d5", 1, "Blogg 1", "f5f78732-73ff-4cd4-94b5-bbf3c7bd70d5" });
 
             migrationBuilder.InsertData(
                 table: "Blogs",
                 columns: new[] { "BlogID", "BlogDetails", "BlogOwnerID", "BlogStatus", "BlogTitle", "ObjectOwnerId" },
-                values: new object[] { 2, "blogg 2", "921d333d-399d-4a35-ad3d-dfc4513a039f", 1, "Blogg 2", "921d333d-399d-4a35-ad3d-dfc4513a039f" });
+                values: new object[] { 2, "blogg 2", "f6cc22af-2d22-4d38-889d-e16830d74411", 1, "Blogg 2", "f6cc22af-2d22-4d38-889d-e16830d74411" });
 
             migrationBuilder.InsertData(
                 table: "Blogs",
                 columns: new[] { "BlogID", "BlogDetails", "BlogOwnerID", "BlogStatus", "BlogTitle", "ObjectOwnerId" },
-                values: new object[] { 3, "blogg 3", "921d333d-399d-4a35-ad3d-dfc4513a039f", 0, "Blogg 3", "921d333d-399d-4a35-ad3d-dfc4513a039f" });
+                values: new object[] { 3, "blogg 3", "f6cc22af-2d22-4d38-889d-e16830d74411", 0, "Blogg 3", "f6cc22af-2d22-4d38-889d-e16830d74411" });
 
             migrationBuilder.InsertData(
                 table: "Posts",
                 columns: new[] { "PostID", "BlogID", "DateCreated", "ObjectOwnerId", "PostDetails", "PostOwnerID", "PostTitle" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2023, 12, 11, 12, 50, 35, 414, DateTimeKind.Local).AddTicks(5559), "4860f6c2-2357-4f48-80b4-d48ce199ab06", "post 1", "4860f6c2-2357-4f48-80b4-d48ce199ab06", "Post 1" },
-                    { 2, 1, new DateTime(2023, 12, 11, 12, 50, 35, 414, DateTimeKind.Local).AddTicks(5594), "921d333d-399d-4a35-ad3d-dfc4513a039f", "post 2", "921d333d-399d-4a35-ad3d-dfc4513a039f", "Post 2" },
-                    { 3, 2, new DateTime(2023, 12, 11, 12, 50, 35, 414, DateTimeKind.Local).AddTicks(5602), "4860f6c2-2357-4f48-80b4-d48ce199ab06", "post 3", "4860f6c2-2357-4f48-80b4-d48ce199ab06", "Post 3" }
+                    { 1, 1, new DateTime(2023, 12, 11, 14, 25, 0, 0, DateTimeKind.Unspecified), "f5f78732-73ff-4cd4-94b5-bbf3c7bd70d5", "post 1", "f5f78732-73ff-4cd4-94b5-bbf3c7bd70d5", "Post 1" },
+                    { 2, 1, new DateTime(2023, 12, 11, 14, 35, 0, 0, DateTimeKind.Unspecified), "f6cc22af-2d22-4d38-889d-e16830d74411", "post 2", "f6cc22af-2d22-4d38-889d-e16830d74411", "Post 2" },
+                    { 3, 2, new DateTime(2023, 12, 11, 16, 25, 0, 0, DateTimeKind.Unspecified), "f5f78732-73ff-4cd4-94b5-bbf3c7bd70d5", "post 3", "f5f78732-73ff-4cd4-94b5-bbf3c7bd70d5", "Post 3" }
                 });
 
             migrationBuilder.InsertData(
@@ -352,21 +352,21 @@ namespace Blog.DataAccess.Migrations
                 columns: new[] { "UserSubscribedBlogID", "ApplicationUserID", "BlogID" },
                 values: new object[,]
                 {
-                    { 1, "4860f6c2-2357-4f48-80b4-d48ce199ab06", 1 },
-                    { 2, "4860f6c2-2357-4f48-80b4-d48ce199ab06", 2 },
-                    { 3, "921d333d-399d-4a35-ad3d-dfc4513a039f", 2 }
+                    { 1, "f5f78732-73ff-4cd4-94b5-bbf3c7bd70d5", 1 },
+                    { 2, "f5f78732-73ff-4cd4-94b5-bbf3c7bd70d5", 2 },
+                    { 3, "f6cc22af-2d22-4d38-889d-e16830d74411", 2 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Comments",
-                columns: new[] { "CommentID", "BlogID", "CommentDetails", "CommentOwnerID", "CommentTitle", "ObjectOwnerId", "PostID" },
+                columns: new[] { "CommentID", "BlogID", "CommentDetails", "CommentOwnerID", "CommentTitle", "DateCreated", "ObjectOwnerId", "PostID" },
                 values: new object[,]
                 {
-                    { 1, 1, "kommentar 1", "4860f6c2-2357-4f48-80b4-d48ce199ab06", "Kommentar 1", "4860f6c2-2357-4f48-80b4-d48ce199ab06", 1 },
-                    { 2, 1, "kommentar 2", "921d333d-399d-4a35-ad3d-dfc4513a039f", "Kommentar 2", "921d333d-399d-4a35-ad3d-dfc4513a039f", 1 },
-                    { 3, 1, "kommentar 3", "4860f6c2-2357-4f48-80b4-d48ce199ab06", "Kommentar 3", "4860f6c2-2357-4f48-80b4-d48ce199ab06", 2 },
-                    { 4, 1, "kommentar 4", "921d333d-399d-4a35-ad3d-dfc4513a039f", "Kommentar 4", "921d333d-399d-4a35-ad3d-dfc4513a039f", 2 },
-                    { 5, 2, "kommentar 5", "921d333d-399d-4a35-ad3d-dfc4513a039f", "Kommentar 5", "921d333d-399d-4a35-ad3d-dfc4513a039f", 3 }
+                    { 1, 1, "kommentar 1", "f5f78732-73ff-4cd4-94b5-bbf3c7bd70d5", "Kommentar 1", new DateTime(2023, 12, 11, 14, 27, 0, 0, DateTimeKind.Unspecified), "f5f78732-73ff-4cd4-94b5-bbf3c7bd70d5", 1 },
+                    { 2, 1, "kommentar 2", "f6cc22af-2d22-4d38-889d-e16830d74411", "Kommentar 2", new DateTime(2023, 12, 11, 14, 30, 0, 0, DateTimeKind.Unspecified), "f6cc22af-2d22-4d38-889d-e16830d74411", 1 },
+                    { 3, 1, "kommentar 3", "f5f78732-73ff-4cd4-94b5-bbf3c7bd70d5", "Kommentar 3", new DateTime(2023, 12, 11, 14, 50, 0, 0, DateTimeKind.Unspecified), "f5f78732-73ff-4cd4-94b5-bbf3c7bd70d5", 2 },
+                    { 4, 1, "kommentar 4", "f6cc22af-2d22-4d38-889d-e16830d74411", "Kommentar 4", new DateTime(2023, 12, 11, 15, 10, 0, 0, DateTimeKind.Unspecified), "f6cc22af-2d22-4d38-889d-e16830d74411", 2 },
+                    { 5, 2, "kommentar 5", "f6cc22af-2d22-4d38-889d-e16830d74411", "Kommentar 5", new DateTime(2023, 12, 11, 17, 5, 0, 0, DateTimeKind.Unspecified), "f6cc22af-2d22-4d38-889d-e16830d74411", 3 }
                 });
 
             migrationBuilder.InsertData(

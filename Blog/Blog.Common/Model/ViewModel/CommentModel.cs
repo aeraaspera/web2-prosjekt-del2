@@ -21,5 +21,6 @@ namespace Blog.Common.Model.ViewModel
         public string? ObjectOwnerId { get; set; }
         public string? CommentOwnerName { get; set; }
         public string? UserName { get; set; }
+        public DateTime? DateCreated { get; set; }
     }
 }
