@@ -64,7 +64,10 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col mb-0 d-flex flex-column justify-content-between">
-                                    <div class="text-start"><MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.AddCircle" Style="@($"color:white;background-color:#8A9A5B;")" @onclick="OpenForm">Create</MudButton></div>
+                                    <div class="text-start"><MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.AddCircle" Style="@($"color:white;background-color:#8A9A5B;")" @onclick="OpenForm">create</MudButton></div>
+                                </div>
+                                <div class="col mb-0 d-flex flex-column justify-content-between">
+                                    <div class="text-end"><MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Sort" Style="@($"color:white;background-color:#8A9A5B;")" OnClick="SortPosts">sorter</MudButton></div>
                                 </div>
                             </div>
                         </div>
@@ -364,4 +367,11 @@
     //        await singleHubConnection.SendAsync("SendMessageToUser", userId, message);
     //    }
     //}
+
+    private async Task SortPosts()
+    {
+        postModels = initialPostModels?.OrderByDescending(model => model.DateCreated).ToList();
+
+        StateHasChanged();
+    }
 }

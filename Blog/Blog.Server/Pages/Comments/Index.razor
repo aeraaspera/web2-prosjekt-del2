@@ -53,7 +53,7 @@
         else
         {
             <MudText Typo="Typo.h5" Align="Align.Center" Style="@($"color:#36454F;font-size:1.5rem;text-transform: uppercase;padding-top:20px;padding-bottom:10px;")">Comments</MudText>
-
+            
             foreach (var commentModel in commentModels)
             {
                 <CommentItem CommentModel="commentModel" />
@@ -93,7 +93,7 @@
 
     private PostModel postModel = new PostModel();
 
-    private List<CommentModel>? commentModels = new List<CommentModel>();
+    private List<CommentModel>? commentModels = new List<CommentModel>();    
 
     private bool isLoadingHeader = true;
     private bool isLoading = true;
@@ -240,5 +240,4 @@
             await hubConnection.SendAsync("SendMessage", message);
         }
     }
-
 }

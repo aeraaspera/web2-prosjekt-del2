@@ -34,3 +34,7 @@ new layout to display DateCreated og the post
 DateCreated is added to models/dto,entity,viewmodel
 
 New MudText is added to CommentItem to display DateCreated
+
+# 12.12.2023
+
+## Feature: "feature-sort-posts-by-DateCreated"
