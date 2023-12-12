@@ -44,7 +44,8 @@ namespace Blog.Api.Controllers
                     PostTitle = post.PostTitle,
                     PostOwnerName = post.PostOwner.UserName,
                     PostTags = _mapper.Map<List<PostTagDto>?>(post.PostTags),
-                    DateCreated = post.DateCreated
+                    DateCreated = post.DateCreated,
+                    FileName = post.FileName
                 };
 
                 postDtos.Add(postDto);
@@ -64,7 +65,8 @@ namespace Blog.Api.Controllers
             {
                 PostTitle = postDto.PostTitle,
                 PostDetails = postDto.PostDetails,
-                BlogID = postDto.BlogID
+                BlogID = postDto.BlogID,
+                FileName = postDto.FileName
             };
             var postId = await _postRepository.Add(post, postDto.PostOwnerName);
 
@@ -87,7 +89,8 @@ namespace Blog.Api.Controllers
                 PostTitle = post.PostTitle,
                 PostOwnerName = post.PostOwner.UserName,
                 PostTags = _mapper.Map<List<PostTagDto>?>(post.PostTags),
-                DateCreated = post.DateCreated
+                DateCreated = post.DateCreated,
+                FileName = post.FileName
             };
             return Ok(postDto);
         }

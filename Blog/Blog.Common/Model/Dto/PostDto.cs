@@ -25,5 +25,6 @@ namespace Blog.Common.Model.Dto
         public string? ObjectOwnerId { get; set; }
         public string? PostOwnerName { get; set; }
         public DateTime? DateCreated { get; set; }
+        public string? FileName { get; set; }
     }
 }

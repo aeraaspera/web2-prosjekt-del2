@@ -23,5 +23,6 @@ namespace Blog.Common.Model.ViewModel
         public List<string>? TagsList { get; set; }
         public string? UserName { get; set; }
         public DateTime? DateCreated { get; set; }
+        public string? FileName { get; set; }
     }
 }

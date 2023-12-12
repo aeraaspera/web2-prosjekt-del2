@@ -16,5 +16,6 @@ namespace Blog.Common.Model.ViewModel
         [MaxLength(1000)]
         public string? PostDetails { get; set; }
         public string? Tags { get; set; }
+        public string? FileName { get; set; }
     }
 }

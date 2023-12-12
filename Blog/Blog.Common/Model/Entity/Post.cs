@@ -18,7 +18,7 @@ namespace Blog.Common.Model.Entity
         [MinLength(5), MaxLength(200)]
         [Required]
         public string PostTitle { get; set; }
-        [MaxLength(1000)]
+        [MaxLength(2000)]
         public string? PostDetails { get; set; }
         public int BlogID { get; set; }
         [ForeignKey("BlogID")]
@@ -30,5 +30,6 @@ namespace Blog.Common.Model.Entity
         public List<PostTag>? PostTags { get; set; }
         public string? ObjectOwnerId { get; set; }
         public DateTime? DateCreated { get; set; } = DateTime.Now;
+        public string? FileName { get; set; }
     }
 }

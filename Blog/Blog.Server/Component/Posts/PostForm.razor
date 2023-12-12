@@ -1,13 +1,16 @@
 ﻿@using Blog.Common.Model.ViewModel
+@using Blog.Server.Service
 @using Microsoft.AspNetCore.Components
+@using Blog.Common.Interface.IService
+@inject IFileUploadService FileUploadService
 
 <MudContainer Fixed="true">
     <div>
         <EditForm Model="@Model" OnValidSubmit="CreatePost">
             <DataAnnotationsValidator />
             <div class="card m-5">
-                <div class="card-header">
-                    <MudText Typo="Typo.h5" Align="Align.Center" Style="@($"color:#36454F;background-color:{Color.Default};font-size:1.5rem;text-transform: uppercase;")">Create a new post</MudText>
+                <div class="card-header" style="background-color: #6082B6">
+                    <MudText Typo="Typo.h5" Align="Align.Center" Style="@($"color:#E5E4E2;font-size:1.5rem;text-transform: uppercase;")">Create a new post</MudText>
                 </div>
                 <div class="card-body">
                     <div class="py-2">
@@ -17,6 +20,11 @@
                     <div class="py-2">
                         <InputText @bind-Value="Model.PostDetails" placeholder="Details" class="form-control mb-2" />
                         <ValidationMessage For="(()=>Model.PostDetails)"></ValidationMessage>
+                    </div>
+                    <div class="py-2">
+                        <InputFile OnChange="OnInputFileChange" multiple>File</InputFile>
+                        <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Success" Style="@($"color:#E5E4E2;background-color:#7393B3;margin-top:10px;margin-bottom:10px;")" @onclick="UploadFile">Upload an image</MudButton>
+                        <label>@labelText</label>
                     </div>
                     <div class="py-2">
                         <InputText @bind-Value="Model.Tags" placeholder="Tags, separated with comma" class="form-control mb-2" />
@@ -37,11 +45,40 @@
     [Parameter]
     public EventCallback<PostCreateModel> OnPostCreated { get; set; }
 
+    IReadOnlyList<IBrowserFile> selectedFiles;
+
+    private string labelText = "";
+
     public PostCreateModel Model { get; set; } = new();
+
+    private string fileName = "";
 
     private async Task CreatePost()
     {
+        Model.FileName = fileName;
         await OnPostCreated.InvokeAsync(Model);
     }
 
+    // Upload Files
+    private void OnInputFileChange(InputFileChangeEventArgs e)
+    {
+        selectedFiles = new List<IBrowserFile>();
+        selectedFiles = e.GetMultipleFiles();
+    }
+
+    private async Task UploadFile()
+    {
+        try
+        {
+            if (selectedFiles is not null && selectedFiles.Count == 1)
+            {
+                fileName = await FileUploadService.UploadFile(selectedFiles[0]);
+                labelText = $"Upload of Image {selectedFiles[0].Name} is successful";
+            }
+        }
+        catch (Exception ex)
+        {
+            labelText = $"Upload failed due to {ex.Message}";
+        }
+    }
 }

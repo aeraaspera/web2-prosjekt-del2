@@ -99,7 +99,8 @@ namespace Blog.DataAccess.Data
                 ObjectOwnerId = user1.Id,
                 PostOwnerID = user1.Id,
                 BlogID = blog1.BlogID,
-                DateCreated = DateTime.Parse("2023-12-11 14:25")
+                DateCreated = DateTime.Parse("2023-12-11 14:25"),
+                FileName = "flower.png"
             };
 
             var post2 = new Post
@@ -110,7 +111,8 @@ namespace Blog.DataAccess.Data
                 ObjectOwnerId = user2.Id,
                 PostOwnerID = user2.Id,
                 BlogID = blog1.BlogID,
-                DateCreated = DateTime.Parse("2023-12-11 14:35")
+                DateCreated = DateTime.Parse("2023-12-11 14:35"),
+                FileName = "flower.png"
             };
 
             var post3 = new Post
@@ -121,7 +123,8 @@ namespace Blog.DataAccess.Data
                 ObjectOwnerId = user1.Id,
                 PostOwnerID = user1.Id,
                 BlogID = blog2.BlogID,
-                DateCreated = DateTime.Parse("2023-12-11 16:25")
+                DateCreated = DateTime.Parse("2023-12-11 16:25"),
+                FileName = "flower.png"
             };
 
             var comment1 = new Comment

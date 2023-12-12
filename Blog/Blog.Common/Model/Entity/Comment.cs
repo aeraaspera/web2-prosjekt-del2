@@ -16,7 +16,7 @@ namespace Blog.Common.Model.Entity
         [MinLength(5), MaxLength(20)]
         [Required]
         public string CommentTitle { get; set; }
-        [MaxLength(50)]
+        [MaxLength(2000)]
         public string? CommentDetails { get; set; }
         public string CommentOwnerID { get; set; }
         [ForeignKey("CommentOwnerID")]
