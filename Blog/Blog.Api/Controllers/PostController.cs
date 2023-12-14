@@ -94,5 +94,15 @@ namespace Blog.Api.Controllers
             };
             return Ok(postDto);
         }
+
+        [HttpPost("delete")]
+        public async Task DeletePost(PostDto post)
+        {
+            var p = new Post
+            {
+                PostID = (int)post.PostID,
+            };
+            await _postRepository.Delete(p);
+        }
     }
 }

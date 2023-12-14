@@ -1,11 +1,10 @@
 ﻿@using Blog.Common.Model.Dto
 @using Blog.Common.Model.ViewModel
 
-
 <MudCard>
     <MudCardContent Style="@($"background-color:#708090;")">
         <MudText Typo="Typo.h6" Align="Align.Center" Style="@($"color:#E5E4E2;font-size:2.0rem;text-align: center;")">@PostModel.PostTitle</MudText>
-        <MudText Typo="Typo.h6" Align="Align.Center" Style="@($"color:#E5E4E2;text-align: center;")">BlogID</MudText>
+        <MudText Typo="Typo.h6" Align="Align.Center" Style="@($"color:#E5E4E2;text-align: center;")">@PostModel.BlogTitle</MudText>
     </MudCardContent>
     <MudCardContent>
         <div class="text-center">
@@ -20,6 +19,7 @@
         <i>Please, leave your comment.</i>
         </MudCardContent>
     <hr />
+
     <div class="text-start col-sm-12">
         @foreach (var tag in PostModel.TagsList)
         {

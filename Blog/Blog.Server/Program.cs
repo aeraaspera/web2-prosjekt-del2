@@ -11,9 +11,12 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Components.Authorization;
 using Blazored.Modal;
 using Blazored.Typeahead;
+using Blog.Server.Authorization;
 using MudBlazor.Services;
 using Blog.Server.SignalR;
 using Microsoft.AspNetCore.ResponseCompression;
+using Blog.Server.Component.Posts;
+using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
@@ -55,6 +58,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSignalR();
 
+builder.Services.AddHttpContextAccessor();
+
 // Add File Upload
 builder.Services.AddScoped<IFileUploadService, FileUploadService>();
 
@@ -66,6 +71,18 @@ builder.Services.AddResponseCompression(opts =>
 
 builder.Services.AddScoped<AuthenticationStateProvider, AuthProvider>();
 builder.Services.AddScoped<AuthProvider>();
+
+builder.Services.AddTransient<IAuthorizationHandler, OwnerAuthorizationHandler>();
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("OwnerPolicy", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.AddRequirements(AuthorizationOperations.Delete);
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

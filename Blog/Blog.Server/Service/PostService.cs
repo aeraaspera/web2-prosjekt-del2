@@ -76,5 +76,23 @@ namespace Blog.Server.Service
                 return new PostDto();
             }
         }
+
+        public async Task DeletePost(PostDto post)
+        {
+            try
+            {
+                var token = await _localStorageService.GetItemAsStringAsync(Constant.Token);
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                var json = JsonConvert.SerializeObject(post);
+                var objectContent = new StringContent(json, Encoding.UTF8, "application/json");
+                await _httpClient.PostAsync("posts/delete", objectContent);
+
+            }
+            catch
+            {
+                throw new Exception();
+            }
+
+        }
     }
 }

@@ -1,5 +1,10 @@
 ﻿@using Blog.Common.Model.Dto
 @using Blog.Common.Model.ViewModel
+@using Blog.Server.Authorization
+@using System.Security.Claims
+@inject IJSRuntime _jsRuntime
+@inject IDialogService DialogService
+@inject IAuthorizationService AuthorizationService
 
 <div class="container p-3 my-3 border rounded bg-light">
     <div class="row align-items-center justify-content-evenly">
@@ -7,7 +12,7 @@
             @PostModel.UserName
         </div>
         <div class="col-sm-1">
-            <b Style="@($"color:#6082B6;")">@PostModel.PostTitle</b>
+            <a href="@($"/posts/details/{PostModel.BlogID}/{PostModel.PostID}")" Style="@($"color:#6082B6;")">@PostModel.PostTitle</a>
         </div>
         <div class="col-sm-2">
             @PostModel.PostDetails
@@ -15,12 +20,17 @@
         <div class="col-sm-2">
             @foreach (var tag in PostModel.TagsList)
             {
-                <MudButton Variant="Variant.Text" Color="Color.Info" href="@tag">@tag</MudButton>
+                <MudButton Variant="Variant.Outlined" Style="@($"color:black;font-size:0.7rem;")" href="@tag">@tag</MudButton>
             }
         </div>
         <div class="col-sm-1">
-            <MudButton Variant="Variant.Filled" Style="@($"color:#E5E4E2;background-color:#7393B3;")" href="@($"/posts/details/{PostModel.BlogID}/{PostModel.PostID}")">details</MudButton>
+            <MudButton Variant="Variant.Filled" Style="@($"color:white;background-color:#7393B3;")" href="@($"/posts/details/{PostModel.BlogID}/{PostModel.PostID}")">details</MudButton>
         </div>
+        <AuthorizeView Policy="OwnerPolicy" Resource="PostModel">
+            <div class="col-sm-1">
+                <MudButton Variant="Variant.Filled" Style="@($"color:white;background-color:#fb807b;")" @onclick="OpenModal">delete</MudButton>
+            </div>
+        </AuthorizeView>
         <div class="col-sm-2">
             @PostModel.DateCreated
         </div>
@@ -28,12 +38,39 @@
 </div>
 
 @code {
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthStateTask { get; set; }
+
+    [Parameter]
+    public EventCallback<PostModel> OnDelete { get; set; }
+
     [Parameter]
     public PostModel PostModel { get; set; }
 
-    protected override void OnInitialized()
+    public bool IsLoading { get; set; }
+
+    public async Task OnInitializeAsync()
     {
         Console.WriteLine($"PostItem Initialized - PostID: {PostModel.PostID}");
         base.OnInitialized();
+    }
+
+    private async Task<AuthenticationState> GetAuthState()
+    {
+        var authState = await AuthStateTask;
+        return authState;
+    }
+
+    private async Task OpenModal()
+    {
+        var parameters = new DialogParameters();
+        parameters.Add("ContentText", "Do you want to confirm?");
+        parameters.Add("ButtonText", "Yes");
+        var dialogresult = DialogService.Show<DeleteConfirmDialog>("Confirm", parameters);
+        var result = await dialogresult.Result;
+        if (!result.Cancelled)
+        {
+            await OnDelete.InvokeAsync(PostModel);
+        }
     }
 }

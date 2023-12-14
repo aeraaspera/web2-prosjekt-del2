@@ -13,5 +13,7 @@ namespace Blog.Common.Interface.IService
         Task<IEnumerable<PostDto>> GetPosts(int blogId);
         Task<int> CreatePost(PostDto postDto);
         Task<PostDto> GetPost(int postId);
+
+        Task DeletePost(PostDto post);
     }
 }

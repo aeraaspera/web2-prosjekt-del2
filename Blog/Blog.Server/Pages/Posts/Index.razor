@@ -16,10 +16,10 @@
 @inject IBlogService BlogService
 @inject IToastService ToastService
 @inject IHubContext<UpdateHub> UpdateHubContext
-@inject IJSRuntime JSRuntime
 @inject NavigationManager NavigationManager
 @inject IAccountService AccountService
 @implements IAsyncDisposable
+@inject IJSRuntime _jsRuntime
 
 <BlazoredToasts Position="ToastPosition.TopRight"
                 Timeout="5"
@@ -87,14 +87,13 @@
         {
             foreach (var postModel in postModels)
             {
-                <PostItem PostModel="postModel" />
+                <PostItem PostModel="postModel" OnDelete="HandleDelete"/>
             }
         }
     </MudContainer>
 </MudContainer>
 
 @code {
-
     [Parameter]
     public int Id { get; set; }
 
@@ -114,6 +113,8 @@
     private List<PostModel>? initialPostModels = new List<PostModel>();
     private bool isLoading = true;
     private bool isHidden = true;
+
+    private int? DeletePostID { get; set; } = 0;
 
     protected override async Task OnInitializedAsync()
     {
@@ -375,5 +376,30 @@
         postModels = initialPostModels?.OrderByDescending(model => model.DateCreated).ToList();
 
         StateHasChanged();
+    }
+
+    private async Task HandleDelete(PostModel postVM)
+    {
+        var state = await GetAuthState();
+        var userName = state.User.Identities.First().Claims.ElementAt(2).Value;
+
+        var post = new PostDto();
+
+        post.PostID = postVM.PostID;
+        post.PostTitle = postVM.PostTitle;
+
+        await PostService.DeletePost(post);
+
+        await Delete_NotifyClients((int)postVM.PostID, userName);
+        
+    }
+
+    private async Task Delete_NotifyClients(int postId, string userName)
+    {
+        if (hubConnection is not null && hubConnection.State == HubConnectionState.Connected)
+        {
+            var message = $"post {postId} removed by {userName}";
+            await hubConnection.SendAsync("SendMessage", message);
+        }
     }
 }

@@ -5,10 +5,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Blog.Server.Authorization;
 
 namespace Blog.Common.Model.ViewModel
 {
-    public class PostModel
+    public class PostModel : IOwnerObject
     {
         public int? PostID { get; set; }
         [MinLength(5), MaxLength(200)]
@@ -17,6 +18,7 @@ namespace Blog.Common.Model.ViewModel
         [MaxLength(1000)]
         public string? PostDetails { get; set; }
         public int BlogID { get; set; }
+        public string? BlogTitle { get; set; }
         public string PostOwnerID { get; set; }
         public string? ObjectOwnerId { get; set; }
         public string? Tags { get; set; }
