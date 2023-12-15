@@ -26,7 +26,7 @@
     <MudGrid Justify="Justify.Center" Class="align-items-center">
         <MudItem xs="12" sm="6">
             <MudCard Class="m-5">
-                <MudCardHeader Style="background-color: grey">
+                    <MudCardHeader Style="color:white; background-color: #2c616d;">
                     <CardHeaderContent>
                             <MudText Typo="Typo.h6" Align="Align.Center" Style="@($"color:{Color.Default};background-color:{Color.Default};text-transform: uppercase;")">register</MudText>
                     </CardHeaderContent>
@@ -38,7 +38,7 @@
                     <MudTextField Label="Password" HelperText="Repeat the password" Class="mt-3" @bind-Value="Model.PasswordConfirm" For="@(() => Model.PasswordConfirm)" InputType="InputType.Password" />
                 </MudCardContent>
                 <MudCardActions>
-                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" FullWidth="true" Style="@($"color:{Color.Default};background-color:{Color.Default};")">Register</MudButton>
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" FullWidth="true" Style="@($"color:white;background-color:#00b38f;")">Register</MudButton>
                 </MudCardActions>
             </MudCard>
         </MudItem>

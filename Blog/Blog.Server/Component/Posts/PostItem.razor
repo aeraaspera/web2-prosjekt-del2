@@ -7,7 +7,7 @@
 @inject IAuthorizationService AuthorizationService
 
 <div class="container p-3 my-3 border rounded bg-light">
-    <div class="row align-items-center justify-content-evenly">
+    <div class="row align-items-center justify-content-start">
         <div class="col-sm-2">
             @PostModel.UserName
         </div>
@@ -18,22 +18,25 @@
             @PostModel.PostDetails
         </div>
         <div class="col-sm-2">
-            @foreach (var tag in PostModel.TagsList)
-            {
-                <MudButton Variant="Variant.Outlined" Style="@($"color:black;font-size:0.7rem;")" href="@tag">@tag</MudButton>
-            }
-        </div>
-        <div class="col-sm-1">
-            <MudButton Variant="Variant.Filled" Style="@($"color:white;background-color:#7393B3;")" href="@($"/posts/details/{PostModel.BlogID}/{PostModel.PostID}")">details</MudButton>
-        </div>
-        <AuthorizeView Policy="OwnerPolicy" Resource="PostModel">
-            <div class="col-sm-1">
-                <MudButton Variant="Variant.Filled" Style="@($"color:white;background-color:#fb807b;")" @onclick="OpenModal">delete</MudButton>
-            </div>
-        </AuthorizeView>
-        <div class="col-sm-2">
             @PostModel.DateCreated
         </div>
+        <div class="col-sm-2">
+            @foreach (var tag in PostModel.TagsList)
+            {
+                <MudButton Variant="Variant.Text" Color="Color.Info" Style="@($"font-size:0.7rem;")" href="@tag">@tag</MudButton>
+            }
+        </div>
+        <div class="col-sm-1" style="margin-right:20px">
+            <MudButton Variant="Variant.Filled" Style="@($"color:white;background-color:#024364;")" href="@($"/posts/details/{PostModel.BlogID}/{PostModel.PostID}")">details</MudButton>
+        </div>
+        <AuthorizeView Policy="OwnerPolicy" Resource="PostModel">
+            <div class="col-sm-1" style="margin-left:20px">
+                <MudButton Variant="Variant.Filled" Color="Color.Error" Style="@($"color:white;")" @onclick="OpenModal">delete</MudButton>
+            </div>
+        </AuthorizeView>
+
+
+
     </div>
 </div>
 

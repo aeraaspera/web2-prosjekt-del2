@@ -1,12 +1,12 @@
 ﻿@using Microsoft.CodeAnalysis.CSharp.Syntax
 
-<nav class="navbar navbar-expand-lg navbar-dark" style="color: #E5E4E2; background-color: #71797e">
+<nav class="navbar navbar-expand-lg navbar-dark" style="color: #E5E4E2; background-color: #494d50">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">BLOGS</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse justify-content-start" id="navbarSupportedContent">
             <form class="d-flex">
 
                 <ul class="navbar-nav">
@@ -20,7 +20,12 @@
                             <span class="oi oi-list" aria-hidden="true"></span> Blogs
                         </NavLink>
                     </li>
-
+                </ul>
+            </form>
+        </div>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <form class="d-flex">
+                <ul class="navbar-nav">
 
                     @if (!IsUserAuthenticated)
                     {
@@ -44,7 +49,6 @@
                             </NavLink>
                         </li>
                     }
-
                 </ul>
             </form>
         </div>

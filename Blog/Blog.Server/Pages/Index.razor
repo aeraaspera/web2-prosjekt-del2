@@ -2,22 +2,26 @@
 
 <PageTitle>Homepage</PageTitle>
 
-<MudContainer MaxWidth="MaxWidth.ExtraSmall" Style="@($"padding-top:10%;padding-button:10%;")">
+<MudContainer MaxWidth="MaxWidth.Small" Style="@($"padding-top:10%;padding-button:10%;")">
 
-    <MudText Typo="Typo.h5" Align="Align.Center" Style="@($"color:#36454F;")">
+   <div class="d-flex justify-center">
+        <MudImage Src="images/floral.jpg" Fluid="true" Elevation="25" Class="rounded-lg ma-4" Style="opacity: 0.4" href="http://www.freepik.com"></MudImage>
+        <MudText Typo="Typo.h5" Align="Align.Center" Style="@($"color:#36454F;position:absolute;margin-top:8%;padding:10px;")">
             Hello,
             @if (!string.IsNullOrEmpty(UserName))
             {
-            <b Style="@($"color:#8A9A5B;")">@UserName</b>
+                <b Style="@($"color:#ff4da6;")">@UserName</b>
             }
             else
             {
-            <b Style="@($"color:#8A9A5B;")">Guest</b>
+                <b Style="@($"color:#ff4da6;")">Guest</b>
             }
-            <br />Welcome to
-        <MudButton Variant="Variant.Outlined" Style="@($"color:white;background-color:#7393B3;font-size:1.25rem")" href="@($"/blogs")">blogs</MudButton>
+            <br/>Welcome to
+            <MudButton Variant="Variant.Outlined" Style="@($"color:white;background-color:#024364;font-size:1.25rem")" href="@($"/blogs")">blogs</MudButton>
         </MudText>
-   
+    </div>
+    
+
 </MudContainer>
 
 

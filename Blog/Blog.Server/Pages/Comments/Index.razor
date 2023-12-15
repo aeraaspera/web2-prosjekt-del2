@@ -40,7 +40,7 @@
 
         @if (Status == BlogStatus.Closed)
         {
-            <MudText Typo="Typo.h6" Align="Align.Start" Style="@($"color:{Colors.Red.Default};font-size:1.25rem;text-transform: uppercase;")">Blog status is <b>closed</b>. New comments can not be created.</MudText>
+            <MudText Typo="Typo.h6" Align="Align.Start" Style="@($"color:{Colors.Red.Default};font-size:1rem;text-transform: uppercase;")">Blog status is <b>closed</b>. New comments can not be created.</MudText>
         }
 
         @if (isLoading)
@@ -52,7 +52,13 @@
         }
         else
         {
-            <MudText Typo="Typo.h5" Align="Align.Center" Style="@($"color:#36454F;font-size:1.5rem;text-transform: uppercase;padding-top:20px;padding-bottom:10px;")">Comments</MudText>
+            <MudText Typo="Typo.h5" Align="Align.Center" Style="@($"color:#36454F;font-size:1.5rem;text-transform: uppercase;padding-top:20px;padding-bottom:0px;")">comments</MudText>
+
+            <div class="container">
+                <div class="row">
+                    <hr style="height: 0.25rem; margin-top: 20px;" />
+                </div>
+            </div>
             
             foreach (var commentModel in commentModels)
             {
@@ -144,6 +150,7 @@
         {
             postModel = new PostModel();
         }
+        var blog = await BlogService.GetBlog(BlogId);
         var post = await PostService.GetPost(PostId);
         var tags = await TagService.GetTags();
 
@@ -156,6 +163,7 @@
         var postMod = new PostModel
             {
                 BlogID = BlogId,
+                BlogTitle = blog.BlogTitle,
                 ObjectOwnerId = post.ObjectOwnerId,
                 PostDetails = post.PostDetails,
                 PostID = post.PostID,

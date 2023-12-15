@@ -2,18 +2,17 @@
 @using Blog.Common.Model.ViewModel
 
 <MudCard>
-    <MudCardContent Style="@($"background-color:#708090;")">
-        <MudText Typo="Typo.h6" Align="Align.Center" Style="@($"color:#E5E4E2;font-size:2.0rem;text-align: center;")">@PostModel.PostTitle</MudText>
-        <MudText Typo="Typo.h6" Align="Align.Center" Style="@($"color:#E5E4E2;text-align: center;")">@PostModel.BlogTitle</MudText>
+    <MudCardContent Style="color:white; background-color: #2c616d;">
+        <MudText Typo="Typo.h6" Align="Align.Center" Style="@($"color:white;font-size:2.0rem;text-align: center;")">@PostModel.PostTitle</MudText>
+        <MudText Typo="Typo.h6" Align="Align.Center" Style="@($"color:white;text-align: center;")">@PostModel.BlogTitle</MudText>
     </MudCardContent>
     <MudCardContent>
         <div class="text-center">
-            @*<MudImage Src="@($"uploads/flower.png")" Width="300" Height="300" Elevation="0" />*@
             <MudImage Src="@($"uploads/{PostModel.FileName}")" Width="300" Height="300" Elevation="0" Style="@($"padding-top:0px;padding-bottom:0px;")" />
         </div>
     </MudCardContent>
     <MudCardContent>
-        <MudText Typo="Typo.body2" Align="Align.Start" Style="@($"color:#6082B6;")">@PostModel.UserName</MudText>
+        <MudText Typo="Typo.body2" Align="Align.Start" Style="@($"color:#024364;")">@PostModel.UserName</MudText>
         <MudText Typo="Typo.body2" Align="Align.Start" Style="@($"color:#71797E;padding-bottom:10px;")">@PostModel.DateCreated</MudText>
         <MudText Typo="Typo.body2" Align="Align.Start" Style="@($"color:#36454F;")">@PostModel.PostDetails</MudText>
         <i>Please, leave your comment.</i>
@@ -23,7 +22,7 @@
     <div class="text-start col-sm-12">
         @foreach (var tag in PostModel.TagsList)
         {
-            <MudButton Variant="Variant.Text" Color="Color.Info" href="@tag">@tag</MudButton>
+            <MudButton Variant="Variant.Text" Color="Color.Info" href="@tag" Style="@($"font-size:0.7rem;")">@tag</MudButton>
         }
     </div>
 </MudCard>

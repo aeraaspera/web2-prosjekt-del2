@@ -31,6 +31,11 @@ namespace Blog.Server.Authorization
                 return Task.CompletedTask;
             }
 
+            if (!state.User.Identities.First().Claims.Any())
+            {
+                return Task.CompletedTask;
+            }
+
             var userId = state.User.Identities.First()
                 .Claims.ElementAt(1).Value;
 

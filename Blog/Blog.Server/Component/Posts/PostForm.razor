@@ -9,8 +9,8 @@
         <EditForm Model="@Model" OnValidSubmit="CreatePost">
             <DataAnnotationsValidator />
             <div class="card m-5">
-                <div class="card-header" style="background-color: #6082B6">
-                    <MudText Typo="Typo.h5" Align="Align.Center" Style="@($"color:#E5E4E2;font-size:1.5rem;text-transform: uppercase;")">Create a new post</MudText>
+                <div class="card-header" style="background-color: #2c616d">
+                    <MudText Typo="Typo.h5" Align="Align.Center" Style="@($"color:white;font-size:1.5rem;text-transform: uppercase;")">Create a new post</MudText>
                 </div>
                 <div class="card-body">
                     <div class="py-2">
@@ -23,7 +23,7 @@
                     </div>
                     <div class="py-2">
                         <InputFile OnChange="OnInputFileChange" multiple>File</InputFile>
-                        <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Success" Style="@($"color:#E5E4E2;background-color:#7393B3;margin-top:10px;margin-bottom:10px;")" @onclick="UploadFile">Upload an image</MudButton>
+                        <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Success" Style="@($"color:white;background-color:#024364;margin-top:10px;margin-bottom:10px;")" @onclick="UploadFile">Upload an image</MudButton>
                         <label>@labelText</label>
                     </div>
                     <div class="py-2">
@@ -31,7 +31,7 @@
                         <ValidationMessage For="(()=>Model.Tags)"></ValidationMessage>
                     </div>
                     <div class="text-center">
-                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.AddCircle" Style="@($"color:white;background-color:#8A9A5B;")">Create post</MudButton>
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.AddCircle" Style="@($"color:white;background-color:#00b38f;")">Create post</MudButton>
                     </div>
                 </div>
             </div>

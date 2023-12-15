@@ -8,7 +8,7 @@ namespace Blog.DataAccess.Data
 {
     public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
-        public ApplicationDbContext(){}
+        public ApplicationDbContext() { }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -61,11 +61,13 @@ namespace Blog.DataAccess.Data
             };
             user2.PasswordHash = hasher.HashPassword(user2, "12345678");
 
+            // blogs
+
             var blog1 = new Common.Model.Entity.Blog
             {
                 BlogID = 1,
-                BlogTitle = "Blogg 1",
-                BlogDetails = "blogg 1",
+                BlogTitle = "Blog 1",
+                BlogDetails = "blog 1",
                 BlogStatus = BlogStatus.Open,
                 ObjectOwnerId = user1.Id,
                 BlogOwnerID = user1.Id
@@ -74,8 +76,8 @@ namespace Blog.DataAccess.Data
             var blog2 = new Common.Model.Entity.Blog
             {
                 BlogID = 2,
-                BlogTitle = "Blogg 2",
-                BlogDetails = "blogg 2",
+                BlogTitle = "Blog 2",
+                BlogDetails = "blog 2",
                 BlogStatus = BlogStatus.Open,
                 ObjectOwnerId = user2.Id,
                 BlogOwnerID = user2.Id
@@ -84,22 +86,34 @@ namespace Blog.DataAccess.Data
             var blog3 = new Common.Model.Entity.Blog
             {
                 BlogID = 3,
-                BlogTitle = "Blogg 3",
-                BlogDetails = "blogg 3",
+                BlogTitle = "Blog 3",
+                BlogDetails = "blog 3",
+                BlogStatus = BlogStatus.Closed,
+                ObjectOwnerId = user1.Id,
+                BlogOwnerID = user1.Id
+            };
+
+            var blog4 = new Common.Model.Entity.Blog
+            {
+                BlogID = 4,
+                BlogTitle = "Blog 4",
+                BlogDetails = "blog 4",
                 BlogStatus = BlogStatus.Closed,
                 ObjectOwnerId = user2.Id,
                 BlogOwnerID = user2.Id
             };
 
+            // posts
+
             var post1 = new Post
             {
                 PostID = 1,
                 PostTitle = "Post 1",
-                PostDetails = "post 1",
+                PostDetails = "post1",
                 ObjectOwnerId = user1.Id,
                 PostOwnerID = user1.Id,
                 BlogID = blog1.BlogID,
-                DateCreated = DateTime.Parse("2023-12-11 14:25"),
+                DateCreated = DateTime.Parse("2023-12-07 09:20"),
                 FileName = "flower.png"
             };
 
@@ -111,7 +125,7 @@ namespace Blog.DataAccess.Data
                 ObjectOwnerId = user2.Id,
                 PostOwnerID = user2.Id,
                 BlogID = blog1.BlogID,
-                DateCreated = DateTime.Parse("2023-12-11 14:35"),
+                DateCreated = DateTime.Parse("2023-12-08 13:20"),
                 FileName = "flower.png"
             };
 
@@ -123,7 +137,43 @@ namespace Blog.DataAccess.Data
                 ObjectOwnerId = user1.Id,
                 PostOwnerID = user1.Id,
                 BlogID = blog2.BlogID,
-                DateCreated = DateTime.Parse("2023-12-11 16:25"),
+                DateCreated = DateTime.Parse("2023-12-09 14:20"),
+                FileName = "flower.png"
+            };
+
+            var post4 = new Post
+            {
+                PostID = 4,
+                PostTitle = "Post 4",
+                PostDetails = "post 4",
+                ObjectOwnerId = user2.Id,
+                PostOwnerID = user2.Id,
+                BlogID = blog2.BlogID,
+                DateCreated = DateTime.Parse("2023-12-09 14:20"),
+                FileName = "flower.png"
+            };
+
+            var post5 = new Post
+            {
+                PostID = 5,
+                PostTitle = "Post 5",
+                PostDetails = "post 5",
+                ObjectOwnerId = user1.Id,
+                PostOwnerID = user1.Id,
+                BlogID = blog3.BlogID,
+                DateCreated = DateTime.Parse("2023-12-09 14:20"),
+                FileName = "flower.png"
+            };
+
+            var post6 = new Post
+            {
+                PostID = 6,
+                PostTitle = "Post 6",
+                PostDetails = "post 6",
+                ObjectOwnerId = user2.Id,
+                PostOwnerID = user2.Id,
+                BlogID = blog4.BlogID,
+                DateCreated = DateTime.Parse("2023-12-09 14:20"),
                 FileName = "flower.png"
             };
 
@@ -136,7 +186,7 @@ namespace Blog.DataAccess.Data
                 BlogID = 1,
                 CommentOwnerID = user1.Id,
                 PostID = post1.PostID,
-                DateCreated = DateTime.Parse("2023-12-11 14:27")
+                DateCreated = DateTime.Parse("2023-12-07 09:30")
             };
 
             var comment2 = new Comment
@@ -148,7 +198,7 @@ namespace Blog.DataAccess.Data
                 BlogID = 1,
                 CommentOwnerID = user2.Id,
                 PostID = post1.PostID,
-                DateCreated = DateTime.Parse("2023-12-11 14:30")
+                DateCreated = DateTime.Parse("2023-12-07 11:10")
             };
 
             var comment3 = new Comment
@@ -160,7 +210,7 @@ namespace Blog.DataAccess.Data
                 BlogID = 1,
                 CommentOwnerID = user1.Id,
                 PostID = post2.PostID,
-                DateCreated = DateTime.Parse("2023-12-11 14:50")
+                DateCreated = DateTime.Parse("2023-12-08 14:00")
             };
 
             var comment4 = new Comment
@@ -172,7 +222,7 @@ namespace Blog.DataAccess.Data
                 BlogID = 1,
                 CommentOwnerID = user2.Id,
                 PostID = post2.PostID,
-                DateCreated = DateTime.Parse("2023-12-11 15:10")
+                DateCreated = DateTime.Parse("2023-12-08 14:10")
             };
 
             var comment5 = new Comment
@@ -184,7 +234,7 @@ namespace Blog.DataAccess.Data
                 BlogID = 2,
                 CommentOwnerID = user2.Id,
                 PostID = post3.PostID,
-                DateCreated = DateTime.Parse("2023-12-11 17:05")
+                DateCreated = DateTime.Parse("2023-12-09 14:40")
             };
 
             var tag1 = new Tag
@@ -279,7 +329,7 @@ namespace Blog.DataAccess.Data
                 ApplicationUserID = user2.Id,
                 BlogID = 2,
             };
-            
+
             // Build Users
             modelBuilder.Entity<IdentityUser>().HasData(user1);
             modelBuilder.Entity<IdentityUser>().HasData(user2);

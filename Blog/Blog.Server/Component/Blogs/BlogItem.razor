@@ -9,7 +9,7 @@
         <div class="col-sm-6">
             <div>
                 <h6>
-                    <a href="@($"/posts/{BlogDto.BlogID}")">@BlogDto.BlogTitle</a>
+                    <a style="color:#ff4da6" href="@($"/posts/{BlogDto.BlogID}")">@BlogDto.BlogTitle</a>
                 </h6>
             </div>
             <div>
@@ -28,13 +28,13 @@
             {
                 <AuthorizeView>
                     <Authorized>
-                        <MudButton Variant="Variant.Filled" Style="@($"color:white;background-color:#8A9A5B;")" @onclick=SubscribeBlog>Subscribe</MudButton>
+                        <MudButton Variant="Variant.Filled" Style="@($"color:white;background-color:#ff4da6;")" @onclick=SubscribeBlog>Subscribe</MudButton>
                     </Authorized>
                 </AuthorizeView>
             }
         </div>
             <div class="col-sm-2">
-            <MudButton Variant="Variant.Filled" Style="@($"color:white;background-color:#7393B3;")" href="@($"/posts/{BlogDto.BlogID}")">posts</MudButton>
+            <MudButton Variant="Variant.Filled" Style="@($"color:white;background-color:#024364;")" href="@($"/posts/{BlogDto.BlogID}")">posts</MudButton>
             </div>
         </div>
      
