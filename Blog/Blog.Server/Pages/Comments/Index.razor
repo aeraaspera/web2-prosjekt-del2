@@ -56,7 +56,11 @@
 
             <div class="container">
                 <div class="row">
-                    <hr style="height: 0.25rem; margin-top: 20px;" />
+                    <div class="col mb-0 d-flex flex-column justify-content-between">
+                    <div class="text-end">
+                        <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Sort" Style="@($"color:white;background-color:#ff4da6;")" OnClick="SortComments">sorter</MudButton></div>
+                    </div>
+                    <hr style="height: 0.25rem; margin-top: 20px;"/>
                 </div>
             </div>
             
@@ -248,5 +252,12 @@
             var message = $"Comment with Id={commentId} created by User : {userName}";
             await hubConnection.SendAsync("SendMessage", message);
         }
+    }
+
+    private async Task SortComments()
+    {
+        commentModels = commentModels?.OrderByDescending(model => model.DateCreated).ToList();
+
+        StateHasChanged();
     }
 }

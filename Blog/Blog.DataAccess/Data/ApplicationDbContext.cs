@@ -149,7 +149,7 @@ namespace Blog.DataAccess.Data
                 ObjectOwnerId = user2.Id,
                 PostOwnerID = user2.Id,
                 BlogID = blog2.BlogID,
-                DateCreated = DateTime.Parse("2023-12-09 14:20"),
+                DateCreated = DateTime.Parse("2023-12-09 14:25"),
                 FileName = "flower.png"
             };
 
@@ -161,7 +161,7 @@ namespace Blog.DataAccess.Data
                 ObjectOwnerId = user1.Id,
                 PostOwnerID = user1.Id,
                 BlogID = blog3.BlogID,
-                DateCreated = DateTime.Parse("2023-12-09 14:20"),
+                DateCreated = DateTime.Parse("2023-12-09 14:35"),
                 FileName = "flower.png"
             };
 
@@ -173,7 +173,7 @@ namespace Blog.DataAccess.Data
                 ObjectOwnerId = user2.Id,
                 PostOwnerID = user2.Id,
                 BlogID = blog4.BlogID,
-                DateCreated = DateTime.Parse("2023-12-09 14:20"),
+                DateCreated = DateTime.Parse("2023-12-09 14:55"),
                 FileName = "flower.png"
             };
 
@@ -309,6 +309,27 @@ namespace Blog.DataAccess.Data
                 TagID = tag3.TagID
             };
 
+            var postTag7 = new PostTag
+            {
+                PostTagID = 7,
+                PostID = post4.PostID,
+                TagID = tag1.TagID
+            };
+
+            var postTag8 = new PostTag
+            {
+                PostTagID = 8,
+                PostID = post5.PostID,
+                TagID = tag3.TagID
+            };
+
+            var postTag9 = new PostTag
+            {
+                PostTagID = 9,
+                PostID = post6.PostID,
+                TagID = tag5.TagID
+            };
+
             var userSubscribedBlog1 = new UserSubscribedBlog
             {
                 UserSubscribedBlogID = 1,
@@ -338,11 +359,15 @@ namespace Blog.DataAccess.Data
             modelBuilder.Entity<Common.Model.Entity.Blog>().HasData(blog1);
             modelBuilder.Entity<Common.Model.Entity.Blog>().HasData(blog2);
             modelBuilder.Entity<Common.Model.Entity.Blog>().HasData(blog3);
+            modelBuilder.Entity<Common.Model.Entity.Blog>().HasData(blog4);
 
             // Build Posts
             modelBuilder.Entity<Post>().HasData(post1);
             modelBuilder.Entity<Post>().HasData(post2);
             modelBuilder.Entity<Post>().HasData(post3);
+            modelBuilder.Entity<Post>().HasData(post4);
+            modelBuilder.Entity<Post>().HasData(post5);
+            modelBuilder.Entity<Post>().HasData(post6);
 
             // Build Comments
             modelBuilder.Entity<Comment>().HasData(comment1);
@@ -365,6 +390,9 @@ namespace Blog.DataAccess.Data
             modelBuilder.Entity<PostTag>().HasData(postTag4);
             modelBuilder.Entity<PostTag>().HasData(postTag5);
             modelBuilder.Entity<PostTag>().HasData(postTag6);
+            modelBuilder.Entity<PostTag>().HasData(postTag7);
+            modelBuilder.Entity<PostTag>().HasData(postTag8);
+            modelBuilder.Entity<PostTag>().HasData(postTag9);
 
             // Build ApplicationUser_Blogs
             modelBuilder.Entity<UserSubscribedBlog>().HasData(userSubscribedBlog1);
