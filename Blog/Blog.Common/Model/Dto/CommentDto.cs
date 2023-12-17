@@ -25,5 +25,7 @@ namespace Blog.Common.Model.Dto
         public string? ObjectOwnerId { get; set; }
         public string? CommentOwnerName { get; set; }
         public DateTime? DateCreated { get; set; }
+        public bool? ToDelete { get; set; }
+        public DateTime? DeleteTime { get; set; }
     }
 }

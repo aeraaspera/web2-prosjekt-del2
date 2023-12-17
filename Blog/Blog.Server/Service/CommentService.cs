@@ -56,5 +56,40 @@ namespace Blog.Server.Service
                 return 0;
             }
         }
+
+        public async Task DeleteComment(CommentDto comment)
+        {
+            try
+            {
+                var token = await _localStorageService.GetItemAsStringAsync(Constant.Token);
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                var json = JsonConvert.SerializeObject(comment);
+                var objectContent = new StringContent(json, Encoding.UTF8, "application/json");
+                await _httpClient.PostAsync("comments/delete", objectContent);
+
+            }
+            catch
+            {
+                throw new Exception();
+            }
+
+        }
+
+        public async Task EditComment(CommentDto comment)
+        {
+            try
+            {
+                var token = await _localStorageService.GetItemAsStringAsync(Constant.Token);
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                var json = JsonConvert.SerializeObject(comment);
+                var objectContent = new StringContent(json, Encoding.UTF8, "application/json");
+                await _httpClient.PostAsync("comments/edit", objectContent);
+
+            }
+            catch
+            {
+                throw new Exception();
+            }
+        }
     }
 }

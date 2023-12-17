@@ -1,24 +1,83 @@
 ﻿@using Blog.Common.Model.Dto
 @using Blog.Common.Model.ViewModel
+@using Blog.Server.Component.Posts
+@using Microsoft.CodeAnalysis.CSharp.Syntax
+@inject IDialogService DialogService
 
-<MudCard Style="@($"background-color:white;border-rounded")">
-    <MudCardContent>
-        <MudText Typo="Typo.body2" Align="Align.Start" Style="@($"color:#024364;padding-top:0px;padding-bottom:0px;")">@CommentModel.UserName</MudText>
-        <MudText Typo="Typo.body2" Align="Align.Start" Style="@($"color:#71797E;padding-top:0px;padding-bottom:10px;")">@CommentModel.DateCreated</MudText>
-        <MudText Typo="Typo.body2" Align="Align.Start" Style="@($"color:#024364;")">@CommentModel.CommentTitle</MudText>
-        <MudText Typo="Typo.body2" Align="Align.Start">@CommentModel.CommentDetails</MudText>
-    </MudCardContent>
-    <hr />
-</MudCard>
+<div class="container p-3 my-3 border rounded bg-light">
+    <div class="row align-items-center justify-content-between">
+
+        <div class="col-sm-10">
+            <MudCardContent>
+                <MudText Typo="Typo.body2" Align="Align.Start" Style="@($"color:#024364;padding-top:0px;padding-bottom:0px;")">@CommentModel.UserName</MudText>
+                <MudText Typo="Typo.body2" Align="Align.Start" Style="@($"color:#71797E;padding-top:0px;padding-bottom:10px;")">@CommentModel.DateCreated</MudText>
+                <MudText Typo="Typo.body2" Align="Align.Start" Style="@($"color:#024364;")">@CommentModel.CommentTitle</MudText>
+                <MudText Typo="Typo.body2" Align="Align.Start">@CommentModel.CommentDetails</MudText>
+            </MudCardContent>
+        </div>
+        <AuthorizeView Policy="OwnerPolicy" Resource="CommentModel">
+            @if (CommentModel.ToDelete is false or null)
+            {
+                <div class="col-sm-2">
+                    <MudButton Variant="Variant.Filled" Style="@($"color:white;background-color:#024364;width:110px;")" OnClick="OpenModal">delete</MudButton>
+                </div>
+            }
+            else if(CommentModel.ToDelete is true && CommentModel.DeleteTime > DateTime.Now)
+            {
+                <div class="col-sm-2">
+                    <MudButton Variant="Variant.Outlined" Style="@($"color:#024364;width:110px;")" OnClick="UndoDelete">undo</MudButton>
+                </div>
+            }
+        </AuthorizeView>
+    </div>
+</div>
+
+
+
+
 
 @code {
     [Parameter]
     public CommentModel CommentModel { get; set; }
 
-    protected override void OnInitialized()
+    [Parameter]
+    public EventCallback<CommentModel> OnDelete { get; set; }
+
+    [Parameter]
+    public EventCallback<CommentModel> OnSetValues { get; set; }
+
+    [Parameter]
+    public EventCallback<CommentModel> OnUndoDelete { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
     {
-        Console.WriteLine($"CommentItem Initialized - CommentID: {CommentModel.CommentID}");
-        base.OnInitialized();
+        if (CommentModel.ToDelete is true && CommentModel.DeleteTime <= DateTime.Now)
+        {
+            await OnDelete.InvokeAsync(CommentModel);
+        }
+    }
+
+    private async Task OpenModal()
+    {
+        var parameters = new DialogParameters();
+        parameters.Add("ContentText", "Do you want to confirm?");
+        parameters.Add("ButtonText", "Yes");
+        var dialogresult = DialogService.Show<DeleteConfirmDialog>("Confirm", parameters);
+        var result = await dialogresult.Result;
+        if (!result.Cancelled)
+        {
+            CommentModel.ToDelete = true;
+            CommentModel.DeleteTime = DateTime.Now.AddSeconds(30);
+            await OnSetValues.InvokeAsync(CommentModel);
+        }
+    }
+
+    private async Task UndoDelete()
+    {
+        CommentModel.ToDelete = false;
+        CommentModel.DeleteTime = null;
+        await OnUndoDelete.InvokeAsync(CommentModel);
     }
 }
 

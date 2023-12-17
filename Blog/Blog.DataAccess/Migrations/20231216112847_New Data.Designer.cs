@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blog.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231215185441_New Data")]
+    [Migration("20231216112847_New Data")]
     partial class NewData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,37 +62,37 @@ namespace Blog.DataAccess.Migrations
                         {
                             BlogID = 1,
                             BlogDetails = "blog 1",
-                            BlogOwnerID = "d198ef66-b495-4642-811a-119c131dbd56",
+                            BlogOwnerID = "b0092801-d60d-4d90-9573-af485cc90dcd",
                             BlogStatus = 1,
                             BlogTitle = "Blog 1",
-                            ObjectOwnerId = "d198ef66-b495-4642-811a-119c131dbd56"
+                            ObjectOwnerId = "b0092801-d60d-4d90-9573-af485cc90dcd"
                         },
                         new
                         {
                             BlogID = 2,
                             BlogDetails = "blog 2",
-                            BlogOwnerID = "10d466cb-e6d8-417a-8481-b8e5f75edd3c",
+                            BlogOwnerID = "8d03bf3e-d04e-4657-9751-b4cb05b0dfad",
                             BlogStatus = 1,
                             BlogTitle = "Blog 2",
-                            ObjectOwnerId = "10d466cb-e6d8-417a-8481-b8e5f75edd3c"
+                            ObjectOwnerId = "8d03bf3e-d04e-4657-9751-b4cb05b0dfad"
                         },
                         new
                         {
                             BlogID = 3,
                             BlogDetails = "blog 3",
-                            BlogOwnerID = "d198ef66-b495-4642-811a-119c131dbd56",
+                            BlogOwnerID = "b0092801-d60d-4d90-9573-af485cc90dcd",
                             BlogStatus = 0,
                             BlogTitle = "Blog 3",
-                            ObjectOwnerId = "d198ef66-b495-4642-811a-119c131dbd56"
+                            ObjectOwnerId = "b0092801-d60d-4d90-9573-af485cc90dcd"
                         },
                         new
                         {
                             BlogID = 4,
                             BlogDetails = "blog 4",
-                            BlogOwnerID = "10d466cb-e6d8-417a-8481-b8e5f75edd3c",
+                            BlogOwnerID = "8d03bf3e-d04e-4657-9751-b4cb05b0dfad",
                             BlogStatus = 0,
                             BlogTitle = "Blog 4",
-                            ObjectOwnerId = "10d466cb-e6d8-417a-8481-b8e5f75edd3c"
+                            ObjectOwnerId = "8d03bf3e-d04e-4657-9751-b4cb05b0dfad"
                         });
                 });
 
@@ -123,11 +123,17 @@ namespace Blog.DataAccess.Migrations
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("DeleteTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ObjectOwnerId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PostID")
                         .HasColumnType("int");
+
+                    b.Property<bool?>("ToDelete")
+                        .HasColumnType("bit");
 
                     b.HasKey("CommentID");
 
@@ -143,10 +149,10 @@ namespace Blog.DataAccess.Migrations
                             CommentID = 1,
                             BlogID = 1,
                             CommentDetails = "kommentar 1",
-                            CommentOwnerID = "d198ef66-b495-4642-811a-119c131dbd56",
+                            CommentOwnerID = "b0092801-d60d-4d90-9573-af485cc90dcd",
                             CommentTitle = "Kommentar 1",
                             DateCreated = new DateTime(2023, 12, 7, 9, 30, 0, 0, DateTimeKind.Unspecified),
-                            ObjectOwnerId = "d198ef66-b495-4642-811a-119c131dbd56",
+                            ObjectOwnerId = "b0092801-d60d-4d90-9573-af485cc90dcd",
                             PostID = 1
                         },
                         new
@@ -154,10 +160,10 @@ namespace Blog.DataAccess.Migrations
                             CommentID = 2,
                             BlogID = 1,
                             CommentDetails = "kommentar 2",
-                            CommentOwnerID = "10d466cb-e6d8-417a-8481-b8e5f75edd3c",
+                            CommentOwnerID = "8d03bf3e-d04e-4657-9751-b4cb05b0dfad",
                             CommentTitle = "Kommentar 2",
                             DateCreated = new DateTime(2023, 12, 7, 11, 10, 0, 0, DateTimeKind.Unspecified),
-                            ObjectOwnerId = "10d466cb-e6d8-417a-8481-b8e5f75edd3c",
+                            ObjectOwnerId = "8d03bf3e-d04e-4657-9751-b4cb05b0dfad",
                             PostID = 1
                         },
                         new
@@ -165,10 +171,10 @@ namespace Blog.DataAccess.Migrations
                             CommentID = 3,
                             BlogID = 1,
                             CommentDetails = "kommentar 3",
-                            CommentOwnerID = "d198ef66-b495-4642-811a-119c131dbd56",
+                            CommentOwnerID = "b0092801-d60d-4d90-9573-af485cc90dcd",
                             CommentTitle = "Kommentar 3",
                             DateCreated = new DateTime(2023, 12, 8, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            ObjectOwnerId = "d198ef66-b495-4642-811a-119c131dbd56",
+                            ObjectOwnerId = "b0092801-d60d-4d90-9573-af485cc90dcd",
                             PostID = 2
                         },
                         new
@@ -176,10 +182,10 @@ namespace Blog.DataAccess.Migrations
                             CommentID = 4,
                             BlogID = 1,
                             CommentDetails = "kommentar 4",
-                            CommentOwnerID = "10d466cb-e6d8-417a-8481-b8e5f75edd3c",
+                            CommentOwnerID = "8d03bf3e-d04e-4657-9751-b4cb05b0dfad",
                             CommentTitle = "Kommentar 4",
                             DateCreated = new DateTime(2023, 12, 8, 14, 10, 0, 0, DateTimeKind.Unspecified),
-                            ObjectOwnerId = "10d466cb-e6d8-417a-8481-b8e5f75edd3c",
+                            ObjectOwnerId = "8d03bf3e-d04e-4657-9751-b4cb05b0dfad",
                             PostID = 2
                         },
                         new
@@ -187,10 +193,10 @@ namespace Blog.DataAccess.Migrations
                             CommentID = 5,
                             BlogID = 2,
                             CommentDetails = "kommentar 5",
-                            CommentOwnerID = "10d466cb-e6d8-417a-8481-b8e5f75edd3c",
+                            CommentOwnerID = "8d03bf3e-d04e-4657-9751-b4cb05b0dfad",
                             CommentTitle = "Kommentar 5",
                             DateCreated = new DateTime(2023, 12, 9, 14, 40, 0, 0, DateTimeKind.Unspecified),
-                            ObjectOwnerId = "10d466cb-e6d8-417a-8481-b8e5f75edd3c",
+                            ObjectOwnerId = "8d03bf3e-d04e-4657-9751-b4cb05b0dfad",
                             PostID = 3
                         });
                 });
@@ -243,9 +249,9 @@ namespace Blog.DataAccess.Migrations
                             BlogID = 1,
                             DateCreated = new DateTime(2023, 12, 7, 9, 20, 0, 0, DateTimeKind.Unspecified),
                             FileName = "flower.png",
-                            ObjectOwnerId = "d198ef66-b495-4642-811a-119c131dbd56",
+                            ObjectOwnerId = "b0092801-d60d-4d90-9573-af485cc90dcd",
                             PostDetails = "post1",
-                            PostOwnerID = "d198ef66-b495-4642-811a-119c131dbd56",
+                            PostOwnerID = "b0092801-d60d-4d90-9573-af485cc90dcd",
                             PostTitle = "Post 1"
                         },
                         new
@@ -254,9 +260,9 @@ namespace Blog.DataAccess.Migrations
                             BlogID = 1,
                             DateCreated = new DateTime(2023, 12, 8, 13, 20, 0, 0, DateTimeKind.Unspecified),
                             FileName = "flower.png",
-                            ObjectOwnerId = "10d466cb-e6d8-417a-8481-b8e5f75edd3c",
+                            ObjectOwnerId = "8d03bf3e-d04e-4657-9751-b4cb05b0dfad",
                             PostDetails = "post 2",
-                            PostOwnerID = "10d466cb-e6d8-417a-8481-b8e5f75edd3c",
+                            PostOwnerID = "8d03bf3e-d04e-4657-9751-b4cb05b0dfad",
                             PostTitle = "Post 2"
                         },
                         new
@@ -265,9 +271,9 @@ namespace Blog.DataAccess.Migrations
                             BlogID = 2,
                             DateCreated = new DateTime(2023, 12, 9, 14, 20, 0, 0, DateTimeKind.Unspecified),
                             FileName = "flower.png",
-                            ObjectOwnerId = "d198ef66-b495-4642-811a-119c131dbd56",
+                            ObjectOwnerId = "b0092801-d60d-4d90-9573-af485cc90dcd",
                             PostDetails = "post 3",
-                            PostOwnerID = "d198ef66-b495-4642-811a-119c131dbd56",
+                            PostOwnerID = "b0092801-d60d-4d90-9573-af485cc90dcd",
                             PostTitle = "Post 3"
                         },
                         new
@@ -276,9 +282,9 @@ namespace Blog.DataAccess.Migrations
                             BlogID = 2,
                             DateCreated = new DateTime(2023, 12, 9, 14, 25, 0, 0, DateTimeKind.Unspecified),
                             FileName = "flower.png",
-                            ObjectOwnerId = "10d466cb-e6d8-417a-8481-b8e5f75edd3c",
+                            ObjectOwnerId = "8d03bf3e-d04e-4657-9751-b4cb05b0dfad",
                             PostDetails = "post 4",
-                            PostOwnerID = "10d466cb-e6d8-417a-8481-b8e5f75edd3c",
+                            PostOwnerID = "8d03bf3e-d04e-4657-9751-b4cb05b0dfad",
                             PostTitle = "Post 4"
                         },
                         new
@@ -287,9 +293,9 @@ namespace Blog.DataAccess.Migrations
                             BlogID = 3,
                             DateCreated = new DateTime(2023, 12, 9, 14, 35, 0, 0, DateTimeKind.Unspecified),
                             FileName = "flower.png",
-                            ObjectOwnerId = "d198ef66-b495-4642-811a-119c131dbd56",
+                            ObjectOwnerId = "b0092801-d60d-4d90-9573-af485cc90dcd",
                             PostDetails = "post 5",
-                            PostOwnerID = "d198ef66-b495-4642-811a-119c131dbd56",
+                            PostOwnerID = "b0092801-d60d-4d90-9573-af485cc90dcd",
                             PostTitle = "Post 5"
                         },
                         new
@@ -298,9 +304,9 @@ namespace Blog.DataAccess.Migrations
                             BlogID = 4,
                             DateCreated = new DateTime(2023, 12, 9, 14, 55, 0, 0, DateTimeKind.Unspecified),
                             FileName = "flower.png",
-                            ObjectOwnerId = "10d466cb-e6d8-417a-8481-b8e5f75edd3c",
+                            ObjectOwnerId = "8d03bf3e-d04e-4657-9751-b4cb05b0dfad",
                             PostDetails = "post 6",
-                            PostOwnerID = "10d466cb-e6d8-417a-8481-b8e5f75edd3c",
+                            PostOwnerID = "8d03bf3e-d04e-4657-9751-b4cb05b0dfad",
                             PostTitle = "Post 6"
                         });
                 });
@@ -456,19 +462,19 @@ namespace Blog.DataAccess.Migrations
                         new
                         {
                             UserSubscribedBlogID = 1,
-                            ApplicationUserID = "d198ef66-b495-4642-811a-119c131dbd56",
+                            ApplicationUserID = "b0092801-d60d-4d90-9573-af485cc90dcd",
                             BlogID = 1
                         },
                         new
                         {
                             UserSubscribedBlogID = 2,
-                            ApplicationUserID = "d198ef66-b495-4642-811a-119c131dbd56",
+                            ApplicationUserID = "b0092801-d60d-4d90-9573-af485cc90dcd",
                             BlogID = 2
                         },
                         new
                         {
                             UserSubscribedBlogID = 3,
-                            ApplicationUserID = "10d466cb-e6d8-417a-8481-b8e5f75edd3c",
+                            ApplicationUserID = "8d03bf3e-d04e-4657-9751-b4cb05b0dfad",
                             BlogID = 2
                         });
                 });
@@ -598,33 +604,33 @@ namespace Blog.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d198ef66-b495-4642-811a-119c131dbd56",
+                            Id = "b0092801-d60d-4d90-9573-af485cc90dcd",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "38c24a48-e59c-4787-b8e2-526997152788",
+                            ConcurrencyStamp = "6aa240ef-318c-47a9-96c7-5cf1932bc455",
                             Email = "user1@test.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER1@TEST.COM",
                             NormalizedUserName = "USER1@TEST.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHsfmQhKLg8tDi2jNtO3BuU6AwKmUb4H1mEBXf5g4P+ioN0dR7Dyyu9AHYHZYrSBTA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOLR7Z/WoaTRaSdKyBLOEA5t95S1a+Cj8Jmk80dRWRuteMzwgajCXz7FNb+ramDMQg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ef26297b-fb89-4cc6-a36d-c3662360a4d6",
+                            SecurityStamp = "1bf1d5a4-1339-4688-983e-72b4b8c048da",
                             TwoFactorEnabled = false,
                             UserName = "user1@test.com"
                         },
                         new
                         {
-                            Id = "10d466cb-e6d8-417a-8481-b8e5f75edd3c",
+                            Id = "8d03bf3e-d04e-4657-9751-b4cb05b0dfad",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0b3ab486-e88c-4645-a93e-d22e88157014",
+                            ConcurrencyStamp = "8b448a28-55e8-4361-b821-9c0809f170c0",
                             Email = "user2@test.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER2@TEST.COM",
                             NormalizedUserName = "USER2@TEST.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEF6LKd1mF5dAoX6oOGhQSYZPbVxur+as7ArNOdMAcnd6j4YwZWlsb3vWoI3d4/MHaA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJ0ys87QvYJUAl7Pb3kqtKySIFPE6E3mRihM1UCcF38cPeFGNxQxQg5P1J5NcwWgaA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ec5a22b0-7bfd-4953-bdb4-55eb5b538cee",
+                            SecurityStamp = "c815cf84-fea6-4305-8d04-d4d94219a0b2",
                             TwoFactorEnabled = false,
                             UserName = "user2@test.com"
                         });

@@ -66,7 +66,7 @@
             
             foreach (var commentModel in commentModels)
             {
-                <CommentItem CommentModel="commentModel" />
+                <CommentItem CommentModel="commentModel" OnDelete="HandleDelete" OnSetValues="HandleSetValues" OnUndoDelete="HandleUndoDelete"/>
             }
         }
 
@@ -205,7 +205,9 @@
                     ObjectOwnerId = comment.ObjectOwnerId,
                     PostID = PostId,
                     UserName = comment.CommentOwnerName,
-                    DateCreated = comment.DateCreated
+                    DateCreated = comment.DateCreated,
+                    DeleteTime = comment.DeleteTime,
+                    ToDelete = comment.ToDelete
                 };
             listOfComments.Add(commentMod);
         }
@@ -259,5 +261,78 @@
         commentModels = commentModels?.OrderByDescending(model => model.DateCreated).ToList();
 
         StateHasChanged();
+    }
+
+    private async Task HandleDelete(CommentModel commentVM)
+    {
+        var state = await GetAuthState();
+        var userName = state.User.Identities.First().Claims.ElementAt(2).Value;
+
+        var comment = new CommentDto();
+
+        comment.CommentID = commentVM.CommentID;
+        comment.CommentTitle = commentVM.CommentTitle;
+
+        await CommentService.DeleteComment(comment);
+
+        await Delete_NotifyClients((int)commentVM.CommentID, userName);
+
+    }
+
+    private async Task HandleSetValues(CommentModel commentVM)
+    {
+        var comment = commentModels.Single(comment => comment.CommentID == commentVM.CommentID);
+
+        comment.ToDelete = commentVM.ToDelete;
+        comment.DeleteTime = commentVM.DeleteTime;
+
+        var c = new CommentDto();
+        c.CommentID = comment.CommentID;
+        c.PostID = comment.PostID;
+        c.DateCreated = comment.DateCreated;
+        c.BlogID = comment.BlogID;
+        c.CommentDetails = comment.CommentDetails;
+        c.CommentOwnerID = comment.CommentOwnerID;
+        c.CommentOwnerName = comment.CommentOwnerName;
+        c.CommentTitle = comment.CommentTitle;
+        c.ObjectOwnerId = comment.ObjectOwnerId;
+        c.DeleteTime = comment.DeleteTime;
+        c.ToDelete = comment.ToDelete;
+
+        await CommentService.EditComment(c);
+        StateHasChanged();
+    }
+
+    private async Task HandleUndoDelete(CommentModel commentVM)
+    {
+        var comment = commentModels.Single(comment => comment.CommentID == commentVM.CommentID);
+
+        comment.ToDelete = commentVM.ToDelete;
+        comment.DeleteTime = commentVM.DeleteTime;
+        
+        var c = new CommentDto();
+        c.CommentID = comment.CommentID;
+        c.PostID = comment.PostID;
+        c.DateCreated = comment.DateCreated;
+        c.BlogID = comment.BlogID;
+        c.CommentDetails = comment.CommentDetails;
+        c.CommentOwnerID = comment.CommentOwnerID;
+        c.CommentOwnerName = comment.CommentOwnerName;
+        c.CommentTitle = comment.CommentTitle;
+        c.ObjectOwnerId = comment.ObjectOwnerId;
+        c.DeleteTime = comment.DeleteTime;
+        c.ToDelete = comment.ToDelete;
+
+        await CommentService.EditComment(c);
+        StateHasChanged();
+    }
+
+    private async Task Delete_NotifyClients(int commentId, string userName)
+    {
+        if (hubConnection is not null && hubConnection.State == HubConnectionState.Connected)
+        {
+            var message = $"comment {commentId} removed by {userName}";
+            await hubConnection.SendAsync("SendMessage", message);
+        }
     }
 }

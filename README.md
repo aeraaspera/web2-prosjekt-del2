@@ -1,8 +1,46 @@
+# Project: DEL 2
+---
+
+## Introduction
+
+New github repository was created.
+
+It contains previous project (del 1).
+
+The following GIT commands were used in the project:
+
+- git add README.md
+- git branch -M main
+
+- git add .
+- git commit -m "text" 
+- git push -u origin "branch"
+- git tag -a v1.0.0 -m "text" 
+- git push origin v1.0.0
+- git tag --merged "branch"
+
+It was created main + 10 branches that contain various features.
+Each feature has its own tag.
+
+0. main branch **[tag v.0.0]**
+1. "feature-display-UserName-on-the-HomePage" **[tag v.0.1]**
+2. "feature-design-part-1" **[tag v.0.2]**
+3. "feature-display-DateCreated-of-the-posts" **[tag v.0.3]**
+4. "feature-display-DateCreated-of-the-comments" **[tag v.0.4]**
+5. "feature-sort-posts-by-DateCreated" **[tag v.0.5]**
+6. "feature-upload-an-image-from-local-storage-and-display-on-the-PostDetails-page" **[tag v.0.6]**
+7. "feature-delete-post" **[tag v.0.70]**
+8. "feature-design-part-2" **[tag v.0.8]**
+9. "feature-sort-comments-by-DateCreated" **[tag v.0.9]**
+10. "feature-undo-the-creation-of-comments" **[tag v.0.10]**
+
+---
 # web2-prosjekt-del2
 
 # 11.12.2023
 ## Feature "feature-display-UserName-on-the-HomePage"
 If user is logged inn, then user's name is displayed on the HomePage.  
+
 Otherwise, the name "Guest" is displayed.
 
 ## Feature "feature-design-part-1"
@@ -38,9 +76,12 @@ New MudText is added to CommentItem to display DateCreated
 # 12.12.2023
 
 ## Feature: "feature-sort-posts-by-DateCreated"
+Posts can be sorted by date created.
+
 New task SortPosts() and corresporende button are added to Post/Index.razor page.
 
 ## Feature: "feature-upload-an-image-from-local-storage-and-display-on-the-PostDetails-page"
+Authorized user can select an image from local storage and use / display it at post creation.
 
 uploads folder
 
@@ -57,9 +98,14 @@ new migration and updating of the database
 # 13.12.2023
 
 ## Feature: "feature-delete-post"
+Authorized user can delete its own post.
+
 Delete button is added
+
 Diaglog to delete post is added
+
 Neccessery functionality to delete post and related changes in other files are added 
+
 Resouce authorization and policy are used
 
 # 14.12.2023
@@ -78,6 +124,8 @@ Changes in ApplicationDbContext.
 # 15.12.2023
 
 ## Feature: "feature-sort-comments-by-DateCreated"
+Comments can be sorted by date created.
+
 DateCreated parameter is used.
 
 New button to sort comments by date created.
@@ -86,4 +134,8 @@ Functionality (sortComments) to sort comments is added.
 
 Changes in ApplicationDbContext to display more information / posts in closed blog.
 
+# 16.12.2023
+## Feature: "feature-undo-the-creation-of-comments"
+Authorized user can delete its own comment.  
 
+The user har the opportunity to undo the deletion of a comment within 30 seconds. 

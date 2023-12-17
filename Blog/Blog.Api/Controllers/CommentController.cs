@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Xml.Linq;
 
 namespace Blog.Api.Controllers
 {
@@ -50,6 +51,23 @@ namespace Blog.Api.Controllers
             var commentId = await _commentRepository.Add(comment, commentDto.CommentOwnerName);
 
             return Ok(commentId);
+        }
+
+        [HttpPost("delete")]
+        public async Task DeleteComment(CommentDto comment)
+        {
+            var c = new Comment
+            {
+                CommentID = (int)comment.CommentID,
+            };
+            await _commentRepository.Delete(c);
+        }
+
+        [HttpPost("edit")]
+        public async Task UpdateComment(CommentDto comment)
+        {
+            var c = _mapper.Map<Comment>(comment);
+            await _commentRepository.Edit(c);
         }
     }
 }

@@ -27,7 +27,8 @@ namespace Blog.Common.Model.Entity
         public int BlogID { get; set; }
         public string? ObjectOwnerId { get; set; }
         public DateTime? DateCreated { get; set; } = DateTime.Now;
-
+        public bool? ToDelete { get; set; }
+        public DateTime? DeleteTime { get; set; }
 
     }
 }

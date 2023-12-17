@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Blog.Server.Authorization;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Blog.Common.Model.ViewModel
 {
-    public class CommentModel
+    public class CommentModel : IOwnerObject
     {
         public int? CommentID { get; set; }
         [MinLength(5), MaxLength(20)]
@@ -22,5 +23,7 @@ namespace Blog.Common.Model.ViewModel
         public string? CommentOwnerName { get; set; }
         public string? UserName { get; set; }
         public DateTime? DateCreated { get; set; }
+        public bool? ToDelete { get; set; }
+        public DateTime? DeleteTime { get; set; }
     }
 }
