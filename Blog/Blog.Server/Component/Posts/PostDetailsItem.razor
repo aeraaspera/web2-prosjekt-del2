@@ -25,6 +25,12 @@
             <MudButton Variant="Variant.Text" Color="Color.Info" href="@tag" Style="@($"font-size:0.7rem;")">@tag</MudButton>
         }
     </div>
+    
+    <hr />
+
+    <div class="text-start col-sm-12">
+        <LikeButton/>
+    </div>
 </MudCard>
 
 @code {
@@ -36,4 +42,5 @@
         Console.WriteLine($"PostItem Initialized - PostID: {PostModel.PostID}");
         base.OnInitialized();
     }
+
 }

@@ -1,0 +1,52 @@
+﻿@using Blazored.LocalStorage
+@using Blog.Common.Constant
+@inject ILocalStorageService StorageService
+
+<AuthorizeView>
+    <Authorized>
+        <MudCard>
+            <MudCardContent>
+                <button @onclick="@IncrementCount" class="btn @( liked == true ? "btn-color-off" : "btn-color-on" )" style="margin:5px"><i class="fa fa-thumbs-up fa-xl" aria-hidden="true"></i></button>
+                <MudText Align="Align.Start" Style="@($"margin-left:25px;")">@currentCount</MudText>
+            </MudCardContent>
+        </MudCard>
+    </Authorized>
+</AuthorizeView>
+
+@code {
+    bool liked = false;
+    int? currentCount = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await StorageService.SetItemAsync(Constant.Count, currentCount.ToString(), CancellationToken.None);
+        StateHasChanged();
+    }
+
+    public async Task IncrementCount()
+    {
+        await ToggleLike();
+        currentCount++;
+        await StorageService.SetItemAsync(Constant.Count, currentCount.ToString());
+        StateHasChanged();
+
+        
+    }
+
+    public async Task ToggleLike()
+    {
+        liked = !liked;
+        await Task.Delay(TimeSpan.FromSeconds(0.5));
+        liked = !liked;
+    }
+}
+
+<style>
+    .btn-color-off {
+        background-color: white
+    }
+
+    .btn-color-on {
+        background-color: #A5E0DD
+    }
+</style>

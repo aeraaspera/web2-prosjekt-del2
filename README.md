@@ -7,6 +7,9 @@ New github repository was created.
 
 It contains previous project (del 1).
 
+main branch tilsvarer prosjekt - del 1
+release branch tilsvarer prosjekt - del 2
+
 The following GIT commands were used in the project:
 
 - git add README.md
@@ -33,7 +36,8 @@ Each feature has its own tag.
 8. "feature-design-part-2" **[tag v.0.8]**
 9. "feature-sort-comments-by-DateCreated" **[tag v.0.9]**
 10. "feature-undo-the-creation-of-comments" **[tag v.0.10]**
-
+11. "feature-like-button" is based on release branch **[tag v.0.11]**
+release branch
 ---
 # web2-prosjekt-del2
 
@@ -139,3 +143,9 @@ Changes in ApplicationDbContext to display more information / posts in closed bl
 Authorized user can delete its own comment.  
 
 The user har the opportunity to undo the deletion of a comment within 30 seconds. 
+
+# 18.12.2023
+## Feature: "feature-like-button"
+Authorized user can "like" the post. The icon changes its color when its clicked. 
+And the count of "likes" is incremented by one.  
+
